@@ -7,7 +7,9 @@ public class Chatbot extends ChatbotData implements Runnable {
     public void runChatbot() {
         Chatbot chatbot = new Chatbot();
         Scanner userInput = new Scanner(System.in);
-        System.out.print(chatbot.getResponse(userInput.nextLine()));
+        while (true) {
+            System.out.print(chatbot.getResponse(userInput.nextLine()));
+        }
     }
 
     public void run() {

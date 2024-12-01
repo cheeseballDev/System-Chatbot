@@ -16,6 +16,6 @@ public class ChatbotData {
     }
 
     public String getResponse(String userResponse) {
-        return responses.getOrDefault(userResponse.toLowerCase().trim(), "I did not understand what you said.");
+        return responses.getOrDefault(userResponse.toLowerCase().trim(), "I did not understand what you said.\nCan you please repeat that?");
     }
 }
