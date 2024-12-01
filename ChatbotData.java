@@ -1,5 +1,3 @@
-package FinalsProject;
-
 import java.util.HashMap;
 
 public class ChatbotData {
