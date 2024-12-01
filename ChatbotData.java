@@ -1,11 +1,11 @@
-package FinalsProject.Chatbot;
+package FinalsProject;
 
 import java.util.HashMap;
 
-public class Chatbot {
+public class ChatbotData {
     private HashMap<String, String> responses;
     
-    public Chatbot() {
+    public ChatbotData() {
         responses = new HashMap<>();
         loadResponses();
     }
