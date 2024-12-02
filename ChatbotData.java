@@ -1,5 +1,9 @@
-//import java.util.HashMap;
-import java.util.*;
+package FinalsProject;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
+
 public class ChatbotData {
     //private HashMap<String, String> responses;
     private HashMap<String, List<String>> responses;
