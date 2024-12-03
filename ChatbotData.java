@@ -62,8 +62,8 @@ public class ChatbotData {
         
         */
         reservations.put("reservation", Arrays.asList("Would you like to book a reservation?"));
-        responses.put("hello", Arrays.asList("Hi. I am BOT Mika, How may I help you?", "Hi! I am BOT Mika, How may I assist you?"));
-        responses.put("hi", Arrays.asList("Hello. I am BOT Mika, How may I help you?", "Hello! I am BOT Mika, How may I assist you?"));
+        responses.put("hello", Arrays.asList("いらっしゃいませ !. I am BOT Mika, How may I help you?", "Hi! I am BOT Mika, How may I assist you?"));
+        responses.put("hi", Arrays.asList("ようこそ. I am BOT Mika, How may I help you?", "Hello! I am BOT Mika, How may I assist you?"));
     }
 
     public String getResponse(String userResponse) {
