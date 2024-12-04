@@ -62,33 +62,32 @@ public class ChatbotData {
         
         */
         reservations.put("reservation", Arrays.asList("Would you like to book a reservation?"));
-        responses.put("hello", Arrays.asList("いらっしゃいませ !. I am BOT Mika, How may I help you?", "Hi! I am BOT Mika, How may I assist you?"));
-        responses.put("hi", Arrays.asList("ようこそ. I am BOT Mika, How may I help you?", "Hello! I am BOT Mika, How may I assist you?"));
+        responses.put("hello", Arrays.asList("Hi! I am BOT Mika, How may I help you?", "Irasshaimase! I am BOT Mika, How may I assist you?"));
+        responses.put("hi", Arrays.asList("Konnichiwa! I am BOT Mika, How may I help you?", "Hello! I am BOT Mika, How may I assist you?"));
+        responses.put("list", Arrays.asList("Here's the list of things:\n"));
     }
 
     public String getResponse(String userResponse) {
         for (String chatContent : responses.keySet()){
-            if (chatContent.contains(userResponse)) {
-                List<String> chat = responses.get(chatContent);
+            if (userResponse.toLowerCase().contains(chatContent)) {
+                    List<String> chat = responses.get(chatContent);
                     Random rng = new Random();
                     return chat.get(rng.nextInt(chat.size()));
                 }
-            }  
+            } 
         //return responses.getOrDefault(userResponse.toLowerCase().trim(), "I did not understand what you said.\nCan you please repeat that?");
-
         // This if statement checks whether the user is struggling
-        if (attempts != 3) {
+        if (attempts != 2) {
             attempts++;
             return botMessage[0];
         }
         return botMessage[1];
-        
     }
 
     public String getReservationResponse(String userResponse){
         for (String chatReservationContent : reservations.keySet()){
-            if (chatReservationContent.contains(userResponse)) {
-                List<String> chat = reservations.get(chatReservationContent);
+            if (chatReservationContent.contains(userResponse.toLowerCase())) {
+                    List<String> chat = reservations.get(chatReservationContent);
                     Random rng = new Random();
                     return chat.get(rng.nextInt(chat.size()));
                 }

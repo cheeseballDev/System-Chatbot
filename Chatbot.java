@@ -13,22 +13,13 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
 
         System.out.println("Salut! Welcome to Mika's restaurant! I am BOT Mika, how many I help you today?");
         while (true) {
-            String userResponse = chatbot.getResponse(userInput.nextLine().toLowerCase());
-            if (!chatbot.getResponse(userResponse).equals(getBotMessage(0))) {
-                System.out.println(chatbot.getResponse(userResponse));
-                reservation(chatbot, userInput);
-            }
-            System.out.println(chatbot.getResponse(userResponse));
+            String userResponse = userInput.nextLine();
+            System.out.println(getResponse(userResponse));
         }
     }
 
     public void reservation(Chatbot chatbot, Scanner userInput){
         while (true) {
-            String userResponse = chatbot.getReservationResponse(userInput.nextLine());
-            if (!chatbot.getReservationResponse(userResponse).equals(getBotMessage(0))) {
-                System.out.println(chatbot.getReservationResponse(userResponse));
-            }
-            //System.out.println(chatbot.getReservationResponse(userResponse));
         }      
     }
     
