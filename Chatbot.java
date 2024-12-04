@@ -2,10 +2,15 @@
 import java.util.Scanner;
 
 public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
-    public void runChatbot() {
+
+    public Chatbot() {
         clearScreen();
+    }
+
+    public void runChatbot() {
         Chatbot chatbot = new Chatbot();
         Scanner userInput = new Scanner(System.in);
+
         System.out.println("Salut! Welcome to Mika's restaurant! I am BOT Mika, how many I help you today?");
         while (true) {
             String userResponse = chatbot.getResponse(userInput.nextLine().toLowerCase());

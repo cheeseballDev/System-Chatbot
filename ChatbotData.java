@@ -68,7 +68,7 @@ public class ChatbotData {
 
     public String getResponse(String userResponse) {
         for (String chatContent : responses.keySet()){
-            if (userResponse.matches(chatContent)) {
+            if (chatContent.contains(userResponse)) {
                 List<String> chat = responses.get(chatContent);
                     Random rng = new Random();
                     return chat.get(rng.nextInt(chat.size()));
@@ -87,7 +87,7 @@ public class ChatbotData {
 
     public String getReservationResponse(String userResponse){
         for (String chatReservationContent : reservations.keySet()){
-            if (userResponse.matches(chatReservationContent)) {
+            if (chatReservationContent.contains(userResponse)) {
                 List<String> chat = reservations.get(chatReservationContent);
                     Random rng = new Random();
                     return chat.get(rng.nextInt(chat.size()));
@@ -99,4 +99,5 @@ public class ChatbotData {
             }
             return botMessage[1];
     }
+
 }
