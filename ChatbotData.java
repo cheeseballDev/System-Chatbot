@@ -8,11 +8,13 @@ public class ChatbotData {
     //private HashMap<String, String> responses;
     private final HashMap<String, List<String>> responses;
     private final HashMap<String, List<String>> reservations;
+    private final HashMap<String, List<String>> ifNewCustomerResponse;
     private String[] botMessage = new String[10];
     private int attempts = 0;
     public ChatbotData() {
         responses = new HashMap<>();
         reservations = new HashMap<>();
+        ifNewCustomerResponse = new HashMap<>();
         loadResponses();
         botMessage[0] = "I did not understand what you said.\nCan you please repeat that?";
         botMessage[1] = "Would you like a list of things I can assist you with?";
@@ -65,7 +67,10 @@ public class ChatbotData {
         reservations.put("reservation", Arrays.asList("test2", "test"));
         responses.put("hello", Arrays.asList("Hi! I am BOT Mika, Would you like to book a reservation?", "Irasshaimase! I am BOT Mika, How may I assist you?"));
         responses.put("hi", Arrays.asList("Konnichiwa! I am BOT Mika, How may I help you?", "Hello! I am BOT Mika, Would you like to book a reservation?"));
-        responses.put("list", Arrays.asList("Here's the list of things:\n"));
+        ifNewCustomerResponse.put("yes", Arrays.asList("test", "test2"));
+        ifNewCustomerResponse.put("no", Arrays.asList("test", "test2"));
+
+        //responses.put("list", Arrays.asList("Here's the list of things:\n"));
     }
 
     public String[] responsesContent(){
@@ -76,9 +81,13 @@ public class ChatbotData {
         return reservations.keySet().toArray(new String[0]);
     }
 
+    public String[] ifNewCustomerResponseContents(){
+        return ifNewCustomerResponse.keySet().toArray(new String[0]);
+    }
+
     public String getResponse(String userResponse) {
         for (String chatContent : responses.keySet()){
-            if (chatContent.contains(userResponse.toLowerCase())) {
+            if (userResponse.toLowerCase().contains(chatContent)) {
                     List<String> chat = responses.get(chatContent);
                     Random rng = new Random();
                     attempts = 0;
@@ -105,7 +114,7 @@ public class ChatbotData {
 
     public String getReservationResponse(String userResponse){
         for (String chatReservationContent : reservations.keySet()){
-            if (chatReservationContent.contains(userResponse.toLowerCase())) {
+            if (userResponse.toLowerCase().contains(chatReservationContent)) {
                     List<String> chat = reservations.get(chatReservationContent);
                     Random rng = new Random();
                     attempts = 0;
@@ -118,4 +127,21 @@ public class ChatbotData {
             }
             return botMessage[1];
     }
+
+    public String getIfNewCustomerResponse(String userResponse){
+        for (String chatCustomerContent : ifNewCustomerResponse.keySet()){
+            if (userResponse.toLowerCase().contains(chatCustomerContent)) {
+                    List<String> chat = ifNewCustomerResponse.get(chatCustomerContent);
+                    Random rng = new Random();
+                    attempts = 0;
+                    return chat.get(rng.nextInt(chat.size()));
+                }
+            }  
+            if (attempts < 2) {
+                attempts++;
+                return botMessage[0];
+            }
+            return botMessage[1];
+    }
+    
 }

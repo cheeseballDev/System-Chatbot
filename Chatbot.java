@@ -15,24 +15,40 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
 
         System.out.println("Welcome to Mika's restaurant! I am BOT Mika, how many I help you today?");
         while (true) {            
-            String userResponse = userInput.nextLine();
-            if(Arrays.asList(cbData.responsesContent()).contains(userResponse.toLowerCase())){
+            String userResponse = userInput.nextLine().toLowerCase();
+            if(Arrays.asList(cbData.responsesContent()).contains(userResponse)){
                 System.out.println(getResponse(userResponse));
-                reservation(chatbot, userInput);
+                reservation(cbData, userInput);
             }else{
                 System.out.println(getResponse(userResponse));
             }
         }
     }
-
-    public void reservation(Chatbot chatbot, Scanner userInput){
-        System.out.println("test");
-        while (true) {
-            String userResponse = userInput.nextLine();
-            System.out.println(getReservationResponse(userResponse));
-            break;
-        }      
+    
+    public void reservation(ChatbotData cbData, Scanner userInput){
+        while (true) {            
+            String userResponse = userInput.nextLine().toLowerCase();
+            if(Arrays.asList(cbData.reservationsContents()).contains(userResponse.toLowerCase())){
+                System.out.println(getReservationResponse(userResponse));
+                ifNewCustomer(cbData, userInput);
+            }else{
+                System.out.println(getReservationResponse(userResponse));
+            }
+        }     
     }
+
+
+    public void ifNewCustomer(ChatbotData cbData, Scanner userInput){
+        System.out.println("New customer?");
+        String userResponse = userInput.nextLine().toLowerCase();
+        if(Arrays.asList(cbData.ifNewCustomerResponseContents()).contains(userResponse)){
+            System.out.println(getIfNewCustomerResponse(userResponse));
+        }else{
+            System.out.println(getIfNewCustomerResponse(userResponse));
+        }
+    }
+
+    
     
     private void checkCondition(String userResponse) {
         //if (userResponse.equals()) {
