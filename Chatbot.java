@@ -1,4 +1,5 @@
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
@@ -8,19 +9,28 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
     }
 
     public void runChatbot() {
+        ChatbotData cbData = new ChatbotData();
         Chatbot chatbot = new Chatbot();
         Scanner userInput = new Scanner(System.in);
 
         System.out.println("Welcome to Mika's restaurant! I am BOT Mika, how many I help you today?");
-        while (true) {
+        while (true) {            
             String userResponse = userInput.nextLine();
-            System.out.println(getResponse(userResponse));
+            if(Arrays.asList(cbData.responsesContent()).contains(userResponse.toLowerCase())){
+                System.out.println(getResponse(userResponse));
+                reservation(chatbot, userInput);
+            }else{
+                System.out.println(getResponse(userResponse));
+            }
         }
     }
 
     public void reservation(Chatbot chatbot, Scanner userInput){
+        System.out.println("test");
         while (true) {
-
+            String userResponse = userInput.nextLine();
+            System.out.println(getReservationResponse(userResponse));
+            break;
         }      
     }
     

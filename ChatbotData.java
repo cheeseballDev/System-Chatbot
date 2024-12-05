@@ -62,52 +62,60 @@ public class ChatbotData {
         
         */
         reservations.put("reserve", Arrays.asList("Would you like to book a reservation?", "test 2"));
-        reservations.put("reservation", Arrays.asList("", "test"));
+        reservations.put("reservation", Arrays.asList("test2", "test"));
         responses.put("hello", Arrays.asList("Hi! I am BOT Mika, Would you like to book a reservation?", "Irasshaimase! I am BOT Mika, How may I assist you?"));
         responses.put("hi", Arrays.asList("Konnichiwa! I am BOT Mika, How may I help you?", "Hello! I am BOT Mika, Would you like to book a reservation?"));
         responses.put("list", Arrays.asList("Here's the list of things:\n"));
     }
 
+    public String[] responsesContent(){
+        return responses.keySet().toArray(new String[0]);
+    }
+
+    public String[] reservationsContents(){
+        return reservations.keySet().toArray(new String[0]);
+    }
+
     public String getResponse(String userResponse) {
         for (String chatContent : responses.keySet()){
-            if (userResponse.toLowerCase().contains(chatContent)) {
+            if (chatContent.contains(userResponse.toLowerCase())) {
                     List<String> chat = responses.get(chatContent);
                     Random rng = new Random();
-                    attempts++;
+                    attempts = 0;
                     return chat.get(rng.nextInt(chat.size()));
                 }
             }
+            /* 
         for (String chatContent : reservations.keySet()){
             if (userResponse.toLowerCase().contains(chatContent)) {
-                    List<String> chat = responses.get(chatContent);
+                    List<String> chat = reservations.get(chatContent);
                     Random rng = new Random();
                     attempts++;
                     return chat.get(rng.nextInt(chat.size()));
                 }
-            } 
+            } */
         //return responses.getOrDefault(userResponse.toLowerCase().trim(), "I did not understand what you said.\nCan you please repeat that?");
         // This if statement checks whether the user is struggling
-        if (attempts != 2) {
+        if (attempts < 2) {
             attempts++;
             return botMessage[0];
         }
         return botMessage[1];
     }
 
-    /* 
     public String getReservationResponse(String userResponse){
         for (String chatReservationContent : reservations.keySet()){
             if (chatReservationContent.contains(userResponse.toLowerCase())) {
                     List<String> chat = reservations.get(chatReservationContent);
                     Random rng = new Random();
+                    attempts = 0;
                     return chat.get(rng.nextInt(chat.size()));
                 }
             }  
-            if (attempts != 3) {
+            if (attempts < 2) {
                 attempts++;
                 return botMessage[0];
             }
             return botMessage[1];
     }
-    */
 }
