@@ -61,9 +61,10 @@ public class ChatbotData {
         responses.put("Wonderful", "Sounds exciting, How many people will be joining you?");
         
         */
-        reservations.put("reservation", Arrays.asList("Would you like to book a reservation?"));
-        responses.put("hello", Arrays.asList("Hi! I am BOT Mika, How may I help you?", "Irasshaimase! I am BOT Mika, How may I assist you?"));
-        responses.put("hi", Arrays.asList("Konnichiwa! I am BOT Mika, How may I help you?", "Hello! I am BOT Mika, How may I assist you?"));
+        reservations.put("reserve", Arrays.asList("Would you like to book a reservation?", "test 2"));
+        reservations.put("reservation", Arrays.asList("", "test"));
+        responses.put("hello", Arrays.asList("Hi! I am BOT Mika, Would you like to book a reservation?", "Irasshaimase! I am BOT Mika, How may I assist you?"));
+        responses.put("hi", Arrays.asList("Konnichiwa! I am BOT Mika, How may I help you?", "Hello! I am BOT Mika, Would you like to book a reservation?"));
         responses.put("list", Arrays.asList("Here's the list of things:\n"));
     }
 
@@ -72,6 +73,15 @@ public class ChatbotData {
             if (userResponse.toLowerCase().contains(chatContent)) {
                     List<String> chat = responses.get(chatContent);
                     Random rng = new Random();
+                    attempts++;
+                    return chat.get(rng.nextInt(chat.size()));
+                }
+            }
+        for (String chatContent : reservations.keySet()){
+            if (userResponse.toLowerCase().contains(chatContent)) {
+                    List<String> chat = responses.get(chatContent);
+                    Random rng = new Random();
+                    attempts++;
                     return chat.get(rng.nextInt(chat.size()));
                 }
             } 
@@ -84,6 +94,7 @@ public class ChatbotData {
         return botMessage[1];
     }
 
+    /* 
     public String getReservationResponse(String userResponse){
         for (String chatReservationContent : reservations.keySet()){
             if (chatReservationContent.contains(userResponse.toLowerCase())) {
@@ -98,5 +109,5 @@ public class ChatbotData {
             }
             return botMessage[1];
     }
-
+    */
 }

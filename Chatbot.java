@@ -11,7 +11,7 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
         Chatbot chatbot = new Chatbot();
         Scanner userInput = new Scanner(System.in);
 
-        System.out.println("Salut! Welcome to Mika's restaurant! I am BOT Mika, how many I help you today?");
+        System.out.println("Welcome to Mika's restaurant! I am BOT Mika, how many I help you today?");
         while (true) {
             String userResponse = userInput.nextLine();
             System.out.println(getResponse(userResponse));
@@ -20,6 +20,7 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
 
     public void reservation(Chatbot chatbot, Scanner userInput){
         while (true) {
+
         }      
     }
     
