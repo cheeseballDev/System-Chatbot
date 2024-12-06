@@ -65,8 +65,8 @@ public class ChatbotData {
         */
         reservations.put("reserve", Arrays.asList("Would you like to book a reservation?", "test 2"));
         reservations.put("reservation", Arrays.asList("test2", "test"));
-        responses.put("hello", Arrays.asList("Hi! I am BOT Mika, Would you like to book a reservation?", "Irasshaimase! I am BOT Mika, How may I assist you?"));
-        responses.put("hi", Arrays.asList("Konnichiwa! I am BOT Mika, How may I help you?", "Hello! I am BOT Mika, Would you like to book a reservation?"));
+        responses.put("hello", Arrays.asList("Hi! I am BOT Mika. Please check our list by typing list for all of our available choices.", "Irasshaimase! I am BOT Mika. Please check our list for all available choices."));
+        responses.put("hi", Arrays.asList("Konnichiwa! I am BOT Mika. Please check our list by typing list for all of our available choices.", "Hello! I am BOT Mika. Please check our list for all available choices."));
         ifNewCustomerResponse.put("yes", Arrays.asList("test", "test2"));
         ifNewCustomerResponse.put("no", Arrays.asList("test", "test2"));
 
@@ -85,7 +85,7 @@ public class ChatbotData {
         return ifNewCustomerResponse.keySet().toArray(new String[0]);
     }
 
-    public String getResponse(String userResponse) {
+    public String getResponseStart(String userResponse) {
         for (String chatContent : responses.keySet()){
             if (userResponse.toLowerCase().contains(chatContent)) {
                     List<String> chat = responses.get(chatContent);
@@ -94,7 +94,6 @@ public class ChatbotData {
                     return chat.get(rng.nextInt(chat.size()));
                 }
             }
-            /* 
         for (String chatContent : reservations.keySet()){
             if (userResponse.toLowerCase().contains(chatContent)) {
                     List<String> chat = reservations.get(chatContent);
@@ -102,7 +101,7 @@ public class ChatbotData {
                     attempts++;
                     return chat.get(rng.nextInt(chat.size()));
                 }
-            } */
+            }
         //return responses.getOrDefault(userResponse.toLowerCase().trim(), "I did not understand what you said.\nCan you please repeat that?");
         // This if statement checks whether the user is struggling
         if (attempts < 2) {

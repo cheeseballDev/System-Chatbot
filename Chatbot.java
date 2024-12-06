@@ -9,28 +9,26 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
     }
 
     public void runChatbot() {
-        ChatbotData cbData = new ChatbotData();
-        Chatbot chatbot = new Chatbot();
+        ChatbotData chatbotData = new ChatbotData();
         Scanner userInput = new Scanner(System.in);
 
         System.out.println("Welcome to Mika's restaurant! I am BOT Mika, how many I help you today?");
         while (true) {            
             String userResponse = userInput.nextLine().toLowerCase();
-            if(Arrays.asList(cbData.responsesContent()).contains(userResponse)){
-                System.out.println(getResponse(userResponse));
-                reservation(cbData, userInput);
-            }else{
-                System.out.println(getResponse(userResponse));
+            if(Arrays.asList(chatbotData.responsesContent()).contains(userResponse)){
+                System.out.println(getResponseStart(userResponse));
+                reservation(chatbotData, userInput);
             }
+            System.out.println(getResponseStart(userResponse));
         }
     }
     
-    public void reservation(ChatbotData cbData, Scanner userInput){
+    public void reservation(ChatbotData chatbotData, Scanner userInput){
         while (true) {            
             String userResponse = userInput.nextLine().toLowerCase();
-            if(Arrays.asList(cbData.reservationsContents()).contains(userResponse.toLowerCase())){
+            if(Arrays.asList(chatbotData.reservationsContents()).contains(userResponse.toLowerCase())){
                 System.out.println(getReservationResponse(userResponse));
-                ifNewCustomer(cbData, userInput);
+                ifNewCustomer(chatbotData, userInput);
             }else{
                 System.out.println(getReservationResponse(userResponse));
             }
@@ -38,10 +36,10 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
     }
 
 
-    public void ifNewCustomer(ChatbotData cbData, Scanner userInput){
+    public void ifNewCustomer(ChatbotData chatbotData, Scanner userInput){
         System.out.println("New customer?");
         String userResponse = userInput.nextLine().toLowerCase();
-        if(Arrays.asList(cbData.ifNewCustomerResponseContents()).contains(userResponse)){
+        if(Arrays.asList(chatbotData.ifNewCustomerResponseContents()).contains(userResponse)){
             System.out.println(getIfNewCustomerResponse(userResponse));
         }else{
             System.out.println(getIfNewCustomerResponse(userResponse));
