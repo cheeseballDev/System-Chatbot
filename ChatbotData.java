@@ -1,16 +1,22 @@
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 public class ChatbotData {
     //private HashMap<String, String> responses;
     private final HashMap<String, List<String>> responses;
     private final HashMap<String, List<String>> reservations;
+    protected final Set<String> yesResponses;
+    protected final Set<String> noResponses;
     private final HashMap<String, List<String>> ifNewCustomerResponse;
     private String[] botMessage = new String[10];
     public ChatbotData() {
+        yesResponses = new HashSet<>();
+        noResponses = new HashSet<>();
         responses = new HashMap<>();
         reservations = new HashMap<>();
         ifNewCustomerResponse = new HashMap<>();
@@ -22,7 +28,21 @@ public class ChatbotData {
     public String getBotMessage(int number) {
         return botMessage[number];
     }
+
     private void loadResponses() {
+        yesResponses.add("yes");
+        yesResponses.add("yeah");
+        yesResponses.add("yuh");
+        yesResponses.add("yep");
+        yesResponses.add("y");
+        yesResponses.add("sure");
+        yesResponses.add("okay");
+        yesResponses.add("ok");
+        noResponses.add("no");
+        noResponses.add("nah");
+        noResponses.add("nope");
+        noResponses.add("n");
+        noResponses.add("never");
         /* 
         responses.put("hello", "Hi. I am BOT Mika, How may I help you?");
         responses.put("hi", "Hello. I am BOT Mika, How may I help you?");
@@ -69,8 +89,14 @@ public class ChatbotData {
         ifNewCustomerResponse.put("yes", Arrays.asList("test", "test2"));
         ifNewCustomerResponse.put("no", Arrays.asList("test", "test2"));
 
+        /*
+         * add opening hours, operaitng hours, menu
+         */
+
         //responses.put("list", Arrays.asList("Here's the list of things:\n"));
     }
+
+
 
     public String[] responsesContent(){
         return responses.keySet().toArray(new String[0]);

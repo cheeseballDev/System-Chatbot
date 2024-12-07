@@ -29,10 +29,10 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
             }
             showDialogue("\nWould you like a list of things I can assist you with?\n> ".toCharArray());
             userResponse = userInput.nextLine().toLowerCase().trim();
-            if (userResponse.contains("yes")) {
+            if (yesResponses.contains(userResponse)) {
                 System.out.println("LIST OF THINGS:\n> Reservation\n> Menu\n> Operating hours");
                 attempts = 0;
-            } else if (userResponse.contains("no")){
+            } else if (noResponses.contains(userResponse)){
                 showDialogue("Thank you for visiting Mika's restaurant! Please come again soon!".toCharArray());
                 System.exit(0);
             } else {
