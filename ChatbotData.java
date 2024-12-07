@@ -10,14 +10,13 @@ public class ChatbotData {
     private final HashMap<String, List<String>> reservations;
     private final HashMap<String, List<String>> ifNewCustomerResponse;
     private String[] botMessage = new String[10];
-    private int attempts = 0;
     public ChatbotData() {
         responses = new HashMap<>();
         reservations = new HashMap<>();
         ifNewCustomerResponse = new HashMap<>();
         loadResponses();
-        botMessage[0] = "I did not understand what you said.\nCan you please repeat that?";
-        botMessage[1] = "Would you like a list of things I can assist you with?";
+        botMessage[0] = "I did not understand what you said. Can you please repeat that?\n> ";
+        botMessage[1] = "Would you like a list of things I can assist you with?\n> ";
     }
 
     public String getBotMessage(int number) {
@@ -65,8 +64,8 @@ public class ChatbotData {
         */
         reservations.put("reserve", Arrays.asList("Would you like to book a reservation?", "test 2"));
         reservations.put("reservation", Arrays.asList("test2", "test"));
-        responses.put("hello", Arrays.asList("Hi! I am BOT Mika. Please check our list by typing list for all of our available choices.", "Irasshaimase! I am BOT Mika. Please check our list for all available choices."));
-        responses.put("hi", Arrays.asList("Konnichiwa! I am BOT Mika. Please check our list by typing list for all of our available choices.", "Hello! I am BOT Mika. Please check our list for all available choices."));
+        responses.put("hello", Arrays.asList("Hi! I am BOT Mika. Please check our list by typing list for all of our available choices.\n> ", "Irasshaimase! I am BOT Mika. Please check our list for all available choices.\n> "));
+        responses.put("hi", Arrays.asList("Konnichiwa! I am BOT Mika. Please check our list by typing list for all of our available choices.\n> ", "Hello! I am BOT Mika. Please check our list for all available choices.\n> "));
         ifNewCustomerResponse.put("yes", Arrays.asList("test", "test2"));
         ifNewCustomerResponse.put("no", Arrays.asList("test", "test2"));
 
@@ -90,7 +89,6 @@ public class ChatbotData {
             if (userResponse.toLowerCase().contains(chatContent)) {
                     List<String> chat = responses.get(chatContent);
                     Random rng = new Random();
-                    attempts = 0;
                     return chat.get(rng.nextInt(chat.size()));
                 }
             }
@@ -98,17 +96,12 @@ public class ChatbotData {
             if (userResponse.toLowerCase().contains(chatContent)) {
                     List<String> chat = reservations.get(chatContent);
                     Random rng = new Random();
-                    attempts++;
                     return chat.get(rng.nextInt(chat.size()));
                 }
             }
         //return responses.getOrDefault(userResponse.toLowerCase().trim(), "I did not understand what you said.\nCan you please repeat that?");
         // This if statement checks whether the user is struggling
-        if (attempts < 2) {
-            attempts++;
-            return botMessage[0];
-        }
-        return botMessage[1];
+        return botMessage[0];
     }
 
     public String getReservationResponse(String userResponse){
@@ -116,15 +109,10 @@ public class ChatbotData {
             if (userResponse.toLowerCase().contains(chatReservationContent)) {
                     List<String> chat = reservations.get(chatReservationContent);
                     Random rng = new Random();
-                    attempts = 0;
                     return chat.get(rng.nextInt(chat.size()));
                 }
             }  
-            if (attempts < 2) {
-                attempts++;
-                return botMessage[0];
-            }
-            return botMessage[1];
+        return botMessage[0];
     }
 
     public String getIfNewCustomerResponse(String userResponse){
@@ -132,15 +120,10 @@ public class ChatbotData {
             if (userResponse.toLowerCase().contains(chatCustomerContent)) {
                     List<String> chat = ifNewCustomerResponse.get(chatCustomerContent);
                     Random rng = new Random();
-                    attempts = 0;
                     return chat.get(rng.nextInt(chat.size()));
                 }
             }  
-            if (attempts < 2) {
-                attempts++;
-                return botMessage[0];
-            }
-            return botMessage[1];
+        return botMessage[0];
     }
     
 }
