@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -13,13 +14,20 @@ public class ChatbotData {
     protected final Set<String> yesResponses;
     protected final Set<String> noResponses;
     private final HashMap<String, List<String>> ifNewCustomerResponse;
+    private final HashMap<String, List<String>> ifNotNewCustomerResponse;
+    private final HashMap<String, List<String>> tableCoupleReservation;
+    private final HashMap<String, List<String>> tablePartyReservation;
     private String[] botMessage = new String[10];
+
     public ChatbotData() {
         yesResponses = new HashSet<>();
         noResponses = new HashSet<>();
         responses = new HashMap<>();
         reservations = new HashMap<>();
         ifNewCustomerResponse = new HashMap<>();
+        ifNotNewCustomerResponse = new HashMap<>();
+        tableCoupleReservation = new HashMap<>();
+        tablePartyReservation = new HashMap<>();
         loadResponses();
         botMessage[0] = "I did not understand what you said. Can you please repeat that?\n> ";
         botMessage[1] = "Would you like a list of things I can assist you with?\n> ";
@@ -43,6 +51,8 @@ public class ChatbotData {
         noResponses.add("nope");
         noResponses.add("n");
         noResponses.add("never");
+        
+
         /* 
         responses.put("hello", "Hi. I am BOT Mika, How may I help you?");
         responses.put("hi", "Hello. I am BOT Mika, How may I help you?");
@@ -87,8 +97,9 @@ public class ChatbotData {
         responses.put("hello", Arrays.asList("Hi! I am BOT Mika. Please check our list by typing list for all of our available choices.\n> ", "Irasshaimase! I am BOT Mika. Please check our list for all available choices.\n> "));
         responses.put("hi", Arrays.asList("Konnichiwa! I am BOT Mika. Please check our list by typing list for all of our available choices.\n> ", "Hello! I am BOT Mika. Please check our list for all available choices.\n> "));
         ifNewCustomerResponse.put("yes", Arrays.asList("test", "test2"));
-        ifNewCustomerResponse.put("no", Arrays.asList("test", "test2"));
-
+        ifNotNewCustomerResponse.put("no", Arrays.asList("Table for a couple or for a party?\n", "Reserving for what purpose?\n"));
+        tableCoupleReservation.put("couple", Arrays.asList("test1", "test2"));
+        tablePartyReservation.put("party", Arrays.asList("test1", "test2"));
         /*
          * add opening hours, operaitng hours, menu
          */
@@ -106,8 +117,28 @@ public class ChatbotData {
         return reservations.keySet().toArray(new String[0]);
     }
 
+    public String[] yesResponsesContents(){
+        return yesResponses.toArray(new String[0]);
+    }
+
+    public String[] noResponsesContents(){
+        return noResponses.toArray(new String[0]);
+    }
+
     public String[] ifNewCustomerResponseContents(){
         return ifNewCustomerResponse.keySet().toArray(new String[0]);
+    }
+
+    public String[] ifNotNewCustomerResponseContents(){
+        return ifNotNewCustomerResponse.keySet().toArray(new String[0]);
+    }
+
+    public String[] tableCoupleReservationContents(){
+        return tableCoupleReservation.keySet().toArray(new String[0]);
+    }
+
+    public String[] tablePartyReservationContents(){
+        return tablePartyReservation.keySet().toArray(new String[0]);
     }
 
     public String getResponseStart(String userResponse) {
@@ -142,9 +173,42 @@ public class ChatbotData {
     }
 
     public String getIfNewCustomerResponse(String userResponse){
-        for (String chatCustomerContent : ifNewCustomerResponse.keySet()){
-            if (userResponse.toLowerCase().contains(chatCustomerContent)) {
-                    List<String> chat = ifNewCustomerResponse.get(chatCustomerContent);
+        for (String chatNewCustomerContent : ifNewCustomerResponse.keySet()){
+            if (userResponse.toLowerCase().contains(chatNewCustomerContent)) {
+                    List<String> chat = ifNewCustomerResponse.get(chatNewCustomerContent);
+                    Random rng = new Random();
+                    return chat.get(rng.nextInt(chat.size()));
+                }
+            }  
+        return botMessage[0];
+    }
+
+    public String getIfNotNewCustomerResponse(String userResponse){
+        for (String chatNotNewCustomerContent : ifNotNewCustomerResponse.keySet()){
+            if (userResponse.toLowerCase().contains(chatNotNewCustomerContent)) {
+                    List<String> chat = ifNotNewCustomerResponse.get(chatNotNewCustomerContent);
+                    Random rng = new Random();
+                    return chat.get(rng.nextInt(chat.size()));
+                }
+            }  
+        return botMessage[0];
+    }
+
+    public String getTableCoupleReseravationResponse(String userResponse){
+        for (String chatTableCoupleContent : tableCoupleReservation.keySet()){
+            if (userResponse.toLowerCase().contains(chatTableCoupleContent)) {
+                    List<String> chat = tableCoupleReservation.get(chatTableCoupleContent);
+                    Random rng = new Random();
+                    return chat.get(rng.nextInt(chat.size()));
+                }
+            }  
+        return botMessage[0];
+    }
+
+    public String getTablePartyReseravationResponse(String userResponse){
+        for (String chatTablePartyContent : tablePartyReservation.keySet()){
+            if (userResponse.toLowerCase().contains(chatTablePartyContent)) {
+                    List<String> chat = tablePartyReservation.get(chatTablePartyContent);
                     Random rng = new Random();
                     return chat.get(rng.nextInt(chat.size()));
                 }
