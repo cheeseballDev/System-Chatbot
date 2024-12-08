@@ -17,6 +17,10 @@ public class ChatbotData {
     private final HashMap<String, List<String>> ifNotNewCustomerResponse;
     private final HashMap<String, List<String>> tableCoupleReservation;
     private final HashMap<String, List<String>> tablePartyReservation;
+    private int partyAmount;
+    private String dateAndTime;
+    private String specialRequests;
+    
     private String[] botMessage = new String[10];
 
     public ChatbotData() {
@@ -28,6 +32,7 @@ public class ChatbotData {
         ifNotNewCustomerResponse = new HashMap<>();
         tableCoupleReservation = new HashMap<>();
         tablePartyReservation = new HashMap<>();
+
         loadResponses();
         botMessage[0] = "I did not understand what you said. Can you please repeat that?\n> ";
         botMessage[1] = "Would you like a list of things I can assist you with?\n> ";
@@ -99,7 +104,9 @@ public class ChatbotData {
         ifNewCustomerResponse.put("yes", Arrays.asList("test", "test2"));
         ifNotNewCustomerResponse.put("no", Arrays.asList("Table for a couple or for a party?\n", "Reserving for what purpose?\n"));
         tableCoupleReservation.put("couple", Arrays.asList("test1", "test2"));
-        tablePartyReservation.put("party", Arrays.asList("test1", "test2"));
+        tablePartyReservation.put("party", Arrays.asList("How many poeple are attending?\n", "How many people are you reserving for?\n"));
+        //tableCoupleReservationPref
+
         /*
          * add opening hours, operaitng hours, menu
          */
@@ -139,6 +146,30 @@ public class ChatbotData {
 
     public String[] tablePartyReservationContents(){
         return tablePartyReservation.keySet().toArray(new String[0]);
+    }
+
+    public void setPartyAmount(int amount){
+        this.partyAmount = amount;
+    }
+
+    public int getPartyAmount(){
+        return partyAmount;
+    }
+
+    public void setDateAndTime(String dateAndTime){
+        this.dateAndTime = dateAndTime;
+    }
+
+    public String getDateAndTime(){
+        return dateAndTime;
+    }
+
+    public void setSpecialRequests(String specialRequests){
+        this.specialRequests = specialRequests;
+    }
+    
+    public String getSpecialRequests(){
+        return specialRequests;
     }
 
     public String getResponseStart(String userResponse) {

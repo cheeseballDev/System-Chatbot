@@ -1,4 +1,6 @@
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -87,20 +89,74 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
             String userResponse = userInput.nextLine().toLowerCase().trim();
             if (Arrays.asList(chatbotData.tableCoupleReservationContents()).contains(userResponse.toLowerCase())) {
                 showDialogue(getTableCoupleReseravationResponse(userResponse).toCharArray());
-                System.exit(0);
+                tableCouple(chatbotData, userInput);
             } else if (Arrays.asList(chatbotData.tablePartyReservationContents()).contains(userResponse.toLowerCase())){
                 showDialogue(getTablePartyReseravationResponse(userResponse).toCharArray());
-                System.exit(0);
+                tableParty(chatbotData, userInput);
             } else {
                 showDialogue(getBotMessage(0).toCharArray());
             }
         }
     }
 
+    public void tableCouple(ChatbotData chatbotData, Scanner userInput){
+
+    }
+
+    public void tableParty(ChatbotData chatbotData, Scanner userInput){
+        while(true){
+            int amount = userInput.nextInt();
+            userInput.nextLine();
+            chatbotData.setPartyAmount(amount);
+            showDialogue("Date and time?\n".toCharArray());
+            while(true){
+                String dateAndTime = userInput.nextLine();
+                try{
+                    SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy HH:mm");
+                    format.parse(dateAndTime);
+                    chatbotData.setDateAndTime(dateAndTime);
+                    break;
+                }catch(ParseException e){
+                    showDialogue("Incorrect time\n".toCharArray());
+                }
+            }
+            showDialogue("Any special requests?\n".toCharArray());
+            while (true) {
+            String userResponse = userInput.nextLine().toLowerCase().trim();
+            if (Arrays.asList(chatbotData.yesResponsesContents()).contains(userResponse.toLowerCase())) {
+                showDialogue("What would they be?\n".toCharArray());
+                String specialRequests = userInput.nextLine();
+                chatbotData.setSpecialRequests(specialRequests);
+                tablePartyConfirmation(chatbotData, userInput);
+            } else if (Arrays.asList(chatbotData.noResponsesContents()).contains(userResponse.toLowerCase())){
+                showDialogue("Alright! Sending you to table reservation page now!\n".toCharArray());
+                tablePartyConfirmation(chatbotData, userInput);
+            } else {
+                showDialogue(getBotMessage(0).toCharArray());
+            }
+            }
+        }
+    }
+
+    public void tablePartyConfirmation(ChatbotData chatbotData, Scanner userInput){
+        showDialogue(("You are reserving a table for " + chatbotData.getPartyAmount() + " people set at " + chatbotData.getDateAndTime() + " with an additional request(s) of " + chatbotData.getSpecialRequests() +  " . Is this correct?\n").toCharArray());
+        while (true) {
+            String userResponse = userInput.nextLine().toLowerCase().trim();
+            if (Arrays.asList(chatbotData.yesResponsesContents()).contains(userResponse.toLowerCase())) {
+                showDialogue("Alright! Your table is now reserved, please show up at the alloted time and enjoy your meals!".toCharArray());
+                System.exit(0);
+            } else if (Arrays.asList(chatbotData.noResponsesContents()).contains(userResponse.toLowerCase())){
+                showDialogue("Understood, sending you back to table settings.".toCharArray());
+                tableParty(chatbotData, userInput);
+            } else {
+                showDialogue(getBotMessage(0).toCharArray());
+            }
+            }
+    }
 
     public void run() {
         try {
-            Thread.sleep(30);
+            Thread.sleep(0);
         } catch (Exception e) {
             e.printStackTrace();
         }
