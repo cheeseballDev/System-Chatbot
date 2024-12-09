@@ -1,5 +1,4 @@
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -51,6 +50,7 @@ public class ChatbotData {
         yesResponses.add("sure");
         yesResponses.add("okay");
         yesResponses.add("ok");
+
         noResponses.add("no");
         noResponses.add("nah");
         noResponses.add("nope");
@@ -101,6 +101,8 @@ public class ChatbotData {
         reservations.put("reservation", Arrays.asList("test2", "test"));
         responses.put("hello", Arrays.asList("Hi! I am BOT Mika. Please check our list by typing list for all of our available choices.\n> ", "Irasshaimase! I am BOT Mika. Please check our list for all available choices.\n> "));
         responses.put("hi", Arrays.asList("Konnichiwa! I am BOT Mika. Please check our list by typing list for all of our available choices.\n> ", "Hello! I am BOT Mika. Please check our list for all available choices.\n> "));
+        responses.put("list", Arrays.asList(""));
+        responses.put("features", Arrays.asList(""));
         ifNewCustomerResponse.put("yes", Arrays.asList("test", "test2"));
         ifNotNewCustomerResponse.put("no", Arrays.asList("Table for a couple or for a party?\n", "Reserving for what purpose?\n"));
         tableCoupleReservation.put("couple", Arrays.asList("test1", "test2"));
