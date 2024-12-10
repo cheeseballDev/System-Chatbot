@@ -10,10 +10,10 @@ public class ChatbotData {
     //private HashMap<String, String> responses;
     private final HashMap<String, List<String>> responses;
     private final HashMap<String, List<String>> reservations;
-    protected final Set<String> yesResponses;
-    protected final Set<String> noResponses;
+    private final Set<String> yesResponses;
+    private final Set<String> noResponses;
     private final HashMap<String, List<String>> ifNewCustomerResponse;
-    private final HashMap<String, List<String>> ifNotNewCustomerResponse;
+    private final HashMap<String, List<String>> ifOldCustomerResponse;
     private final HashMap<String, List<String>> tableCoupleReservation;
     private final HashMap<String, List<String>> tablePartyReservation;
     private int partyAmount;
@@ -28,17 +28,13 @@ public class ChatbotData {
         responses = new HashMap<>();
         reservations = new HashMap<>();
         ifNewCustomerResponse = new HashMap<>();
-        ifNotNewCustomerResponse = new HashMap<>();
+        ifOldCustomerResponse = new HashMap<>();
         tableCoupleReservation = new HashMap<>();
         tablePartyReservation = new HashMap<>();
 
         loadResponses();
         botMessage[0] = "I did not understand what you said. Can you please repeat that?\n> ";
         botMessage[1] = "Would you like a list of things I can assist you with?\n> ";
-    }
-
-    public String getBotMessage(int number) {
-        return botMessage[number];
     }
 
     private void loadResponses() {
@@ -56,47 +52,7 @@ public class ChatbotData {
         noResponses.add("nope");
         noResponses.add("n");
         noResponses.add("never");
-        
 
-        /* 
-        responses.put("hello", "Hi. I am BOT Mika, How may I help you?");
-        responses.put("hi", "Hello. I am BOT Mika, How may I help you?");
-        responses.put("hello", "Hi! I am BOT Mika, How may I help you?");
-        responses.put("hi", "Hello! I am BOT Mika, How may I help you?");
-        responses.put("hi", "Hello! I am BOT Mika, your personal dining assistant. How may I help you?");
-        responses.put("hello", "hi! Craving for something delicious or would you like to book a reservation?");
-        responses.put("hi", "hello! I am BOT Mika, your personal dining assistant. Would you like to order or book a reservation?");
-        responses.put("hello", "hi! would you like to order or book a reservation?");
-
-        //order
-        responses.put("Amazing", "wonderful! We have lots to offer, here's our menu.");
-        responses.put(" ", "What would you like to order?");
-
-        //Reservation
-        responses.put("Great", "Gladly, Is this your first time dining with us?");
-
-
-        //yes
-        responses.put(" ", "Welcome! We’re so excited to have you. Is this for a group gathering or a personal date?");
-
-        //date
-        responses.put("that's lovely", "That's great, Do you have any special preferences for seating, like a quiet corner or window view?");
-
-        //group
-        responses.put("Wonderful", "Sounds exciting, How many people will be joining you?");
-
-        
-        //no
-        responses.put("Welcome back", "Welcome back! Are you reserving for a group gathering or a personal date this time?");
-
-        //date
-        responses.put("that's great ", "That's lovely, would you it be the usual seating or would like to change your preference for today?");
-        responses.put(" ", "Do you have any special preferences for seating, like a quiet corner or window view?");
-
-        //group
-        responses.put("Wonderful", "Sounds exciting, How many people will be joining you?");
-        
-        */
         reservations.put("reserve", Arrays.asList("Would you like to book a reservation?", "test 2"));
         reservations.put("reservation", Arrays.asList("test2", "test"));
         responses.put("hello", Arrays.asList("Hi! I am BOT Mika. Please check our list by typing list for all of our available choices.\n> ", "Irasshaimase! I am BOT Mika. Please check our list for all available choices.\n> "));
@@ -104,49 +60,49 @@ public class ChatbotData {
         responses.put("list", Arrays.asList(""));
         responses.put("features", Arrays.asList(""));
         ifNewCustomerResponse.put("yes", Arrays.asList("test", "test2"));
-        ifNotNewCustomerResponse.put("no", Arrays.asList("Table for a couple or for a party?\n", "Reserving for what purpose?\n"));
+        ifOldCustomerResponse.put("no", Arrays.asList("Table for a couple or for a party?\n", "Reserving for what purpose?\n"));
         tableCoupleReservation.put("couple", Arrays.asList("test1", "test2"));
         tablePartyReservation.put("party", Arrays.asList("How many poeple are attending?\n", "How many people are you reserving for?\n"));
         //tableCoupleReservationPref
 
         /*
-         * add opening hours, operaitng hours, menu
+         * add opening hours, operaitng hours, menu, list/features
          */
-
-        //responses.put("list", Arrays.asList("Here's the list of things:\n"));
     }
 
+    public String getBotMessage(int number) {
+        return botMessage[number];
+    }
 
-
-    public String[] responsesContent(){
+    public String[] getResponsesContent(){
         return responses.keySet().toArray(new String[0]);
     }
 
-    public String[] reservationsContents(){
+    public String[] getReservationsContents(){
         return reservations.keySet().toArray(new String[0]);
     }
 
-    public String[] yesResponsesContents(){
+    public String[] getYesResponsesContents(){
         return yesResponses.toArray(new String[0]);
     }
 
-    public String[] noResponsesContents(){
+    public String[] getNoResponsesContents(){
         return noResponses.toArray(new String[0]);
     }
 
-    public String[] ifNewCustomerResponseContents(){
+    public String[] getIfNewCustomerResponseContents(){
         return ifNewCustomerResponse.keySet().toArray(new String[0]);
     }
 
-    public String[] ifNotNewCustomerResponseContents(){
-        return ifNotNewCustomerResponse.keySet().toArray(new String[0]);
+    public String[] getIfOldCustomerResponseContents(){
+        return ifOldCustomerResponse.keySet().toArray(new String[0]);
     }
 
-    public String[] tableCoupleReservationContents(){
+    public String[] getTableCoupleReservationContents(){
         return tableCoupleReservation.keySet().toArray(new String[0]);
     }
 
-    public String[] tablePartyReservationContents(){
+    public String[] getTablePartyReservationContents(){
         return tablePartyReservation.keySet().toArray(new String[0]);
     }
 
@@ -217,9 +173,9 @@ public class ChatbotData {
     }
 
     public String getIfNotNewCustomerResponse(String userResponse){
-        for (String chatNotNewCustomerContent : ifNotNewCustomerResponse.keySet()){
+        for (String chatNotNewCustomerContent : ifOldCustomerResponse.keySet()){
             if (userResponse.toLowerCase().contains(chatNotNewCustomerContent)) {
-                    List<String> chat = ifNotNewCustomerResponse.get(chatNotNewCustomerContent);
+                    List<String> chat = ifOldCustomerResponse.get(chatNotNewCustomerContent);
                     Random rng = new Random();
                     return chat.get(rng.nextInt(chat.size()));
                 }
