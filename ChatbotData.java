@@ -54,8 +54,8 @@ public class ChatbotData {
 
         responses.put("hello", Arrays.asList("Hi! I am BOT Mika. Please check our list by typing list for all of our available choices.\n> ", "Irasshaimase! I am BOT Mika. Please check our list for all available choices.\n> "));
         responses.put("hi", Arrays.asList("Konnichiwa! I am BOT Mika. Please check our list by typing list for all of our available choices.\n> ", "Hello! I am BOT Mika. Please check our list for all available choices.\n> "));
-        responses.put("list", Arrays.asList("Here's the list of features available!\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Address"));
-        responses.put("features", Arrays.asList("Here's the list of features available!\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Address"));
+        responses.put("list", Arrays.asList("Here's the list of features available!\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Contact information\n - Telephone number\n - Email address\n - Address"));
+        responses.put("features", Arrays.asList("Here's the list of features available!\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Contact information\n - Telephone number\n - Email address\n - Address"));
 
         reservations.put("reserve", Arrays.asList("Would you like to book a reservation?", "test 2"));
         reservations.put("reservation", Arrays.asList("test2", "test"));
