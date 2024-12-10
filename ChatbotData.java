@@ -7,11 +7,10 @@ import java.util.Random;
 import java.util.Set;
 
 public class ChatbotData {
-    //private HashMap<String, String> responses;
-    private final HashMap<String, List<String>> responses;
-    private final HashMap<String, List<String>> reservations;
     private final Set<String> yesResponses;
     private final Set<String> noResponses;
+    private final HashMap<String, List<String>> responses;
+    private final HashMap<String, List<String>> reservations;
     private final HashMap<String, List<String>> ifNewCustomerResponse;
     private final HashMap<String, List<String>> ifOldCustomerResponse;
     private final HashMap<String, List<String>> tableCoupleReservation;
@@ -53,20 +52,24 @@ public class ChatbotData {
         noResponses.add("n");
         noResponses.add("never");
 
-        reservations.put("reserve", Arrays.asList("Would you like to book a reservation?", "test 2"));
-        reservations.put("reservation", Arrays.asList("test2", "test"));
         responses.put("hello", Arrays.asList("Hi! I am BOT Mika. Please check our list by typing list for all of our available choices.\n> ", "Irasshaimase! I am BOT Mika. Please check our list for all available choices.\n> "));
         responses.put("hi", Arrays.asList("Konnichiwa! I am BOT Mika. Please check our list by typing list for all of our available choices.\n> ", "Hello! I am BOT Mika. Please check our list for all available choices.\n> "));
-        responses.put("list", Arrays.asList(""));
-        responses.put("features", Arrays.asList(""));
+        responses.put("list", Arrays.asList("Here's the list of features available!\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Address"));
+        responses.put("features", Arrays.asList("Here's the list of features available!\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Address"));
+
+        reservations.put("reserve", Arrays.asList("Would you like to book a reservation?", "test 2"));
+        reservations.put("reservation", Arrays.asList("test2", "test"));
+        
         ifNewCustomerResponse.put("yes", Arrays.asList("test", "test2"));
         ifOldCustomerResponse.put("no", Arrays.asList("Table for a couple or for a party?\n", "Reserving for what purpose?\n"));
         tableCoupleReservation.put("couple", Arrays.asList("test1", "test2"));
         tablePartyReservation.put("party", Arrays.asList("How many poeple are attending?\n", "How many people are you reserving for?\n"));
         //tableCoupleReservationPref
 
+
+
         /*
-         * add opening hours, operaitng hours, menu, list/features
+         * add opening hours, operaitng hours, menu, address, list/features
          */
     }
 

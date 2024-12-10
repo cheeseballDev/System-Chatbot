@@ -16,26 +16,31 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
         ChatbotData chatbotData = new ChatbotData();
         Scanner userInput = new Scanner(System.in);
 
-        showDialogue("Welcome to Mika's restaurant! I am BOT Mika, how many I help you today?\n> ".toCharArray());
+        showDialogue("Welcome to Kyoto's Finest! I am BOT Mika, how many I help you today?\n> ".toCharArray());
         String userResponse;
         while (true) {
-            while (attempts != 3) {       
+            while (attempts != 4) {       
                 userResponse = userInput.nextLine().toLowerCase().trim();     
                 if (!Arrays.asList(chatbotData.getResponsesContent()).contains(userResponse)){
+                    clearScreen();
                     showDialogue(getResponseStart(userResponse).toCharArray());
                     attempts++;
                     continue;
+                } else if (attempts == 3) {
+                    
                 }
+                clearScreen();
                 showDialogue(getResponseStart(userResponse).toCharArray());
                 reservation(chatbotData, userInput);
             }
-            showDialogue("\nWould you like a list of things I can assist you with?\n> ".toCharArray());
+            clearScreen();
+            showDialogue("Would you like a list of things I can assist you with?\n> ".toCharArray());
             userResponse = userInput.nextLine().toLowerCase().trim();
             if (Arrays.asList(chatbotData.getYesResponsesContents()).contains(userResponse)) {
-                System.out.println("My features\n> Reservation\n> Menu\n> Operating hours");
                 attempts = 0;
+                runChatbot();
             } else if (Arrays.asList(chatbotData.getNoResponsesContents()).contains(userResponse)){
-                showDialogue("Thank you for visiting Mika's restaurant! Please come again soon!".toCharArray());
+                showDialogue("Thank you for visiting Kyoto's Finest! Please come again soon!".toCharArray());
                 System.exit(0);
             } else {
                 showDialogue(getBotMessage(0).toCharArray());
