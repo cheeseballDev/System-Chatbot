@@ -27,7 +27,9 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
                     attempts++;
                     continue;
                 } else if (attempts == 3) {
-                    
+                    /*
+                     * for prompt
+                     */
                 }
                 clearScreen();
                 showDialogue(getResponseStart(userResponse).toCharArray());
@@ -36,6 +38,8 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
             clearScreen();
             showDialogue("Would you like a list of things I can assist you with?\n> ".toCharArray());
             userResponse = userInput.nextLine().toLowerCase().trim();
+
+            // add to prompt
             if (Arrays.asList(chatbotData.getYesResponsesContents()).contains(userResponse)) {
                 attempts = 0;
                 runChatbot();
