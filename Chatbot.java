@@ -48,13 +48,19 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
             } else if (Arrays.asList(chatbotData.getReservationsContent()).contains(userResponse)) {
                 setReservation(chatbotData, userInput);
                 break;
+            } else if (Arrays.asList(chatbotData.getMenuContent()).contains(userResponse)){
+                showMenuOptions();
+                break;
             } else {
                 clearScreen();
                 attempts++;
                 showDialogue(getResponseStart(userResponse).toCharArray());
             }
         }
-        
+    }
+
+    public void showMenuOptions() {
+        System.out.println("menu");
     }
     
     public void setReservation(ChatbotData chatbotData, Scanner userInput){

@@ -10,6 +10,7 @@ public class ChatbotData {
     private final Set<String> yesResponses;
     private final Set<String> noResponses;
     private final HashMap<String, List<String>> responses;
+    private final HashMap<String, List<String>> menu;
     private final HashMap<String, List<String>> reservations; 
     private final HashMap<String, List<String>> tableCoupleReservation;
     private final Set<String> tablePreference;
@@ -26,6 +27,7 @@ public class ChatbotData {
         yesResponses = new HashSet<>();
         noResponses = new HashSet<>();
         responses = new HashMap<>();
+        menu = new HashMap<>();
         reservations = new HashMap<>();
         tableCoupleReservation = new HashMap<>();
         tablePreference = new HashSet<>();
@@ -54,23 +56,31 @@ public class ChatbotData {
         yesResponses.add("iie");
 
         // BASIC RESPONSES
-        responses.put("hello", Arrays.asList("Hi {username}! I am BOT Mika. Please check our list by typing list for all of our available choices.\n> ", "Irasshaimase {username}! I am BOT Mika. Please check our list for all available choices.\n> "));
-        responses.put("hi", Arrays.asList("Konnichiwa {username}! I am BOT Mika. Please check our list by typing list for all of our available choices.\n> ", "Hello {username}! I am BOT Mika. Please check our list for all available choices.\n> "));
-        responses.put("list", Arrays.asList("Here's the list of features available!\n> Restaurant description and information\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Contact information\n - Telephone number\n - Email address\n - Address\n\nWhat else do you need?\n> "));
-        responses.put("features", Arrays.asList("Here's the list of features available!\n> Restaurant description and information\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Contact information\n - Telephone number\n - Email address\n - Address\n\nWhat else do you need?\n> "));
+        responses.put("hello", Arrays.asList("Hi {username}! I am BOT Mika. Please check our list by typing list for all of our available choices by typing list.\n> ", "Irasshaimase {username}! I am BOT Mika. Please check our list for all available choices by typing list.\n> "));
+        responses.put("hi", Arrays.asList("Konnichiwa {username}! I am BOT Mika. Please check our list by typing list for all of our available choices by typing list.\n> ", "Hello {username}! I am BOT Mika. Please check our list for all available choices by typing list.\n> "));
+        responses.put("list", Arrays.asList("Here's the list of features available!\n> Restaurant description and information\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Contact information\n - Telephone number\n - Email address\n - Address\n\nIs there anything else you need?\n> "));
+        responses.put("features", Arrays.asList("Here's the list of features available!\n> Restaurant description and information\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Contact information\n - Telephone number\n - Email address\n - Address\n\nIs there anything else you need?\n> "));
+        responses.put("help", Arrays.asList("Here's the list of features available!\n> Restaurant description and information\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Contact information\n - Telephone number\n - Email address\n - Address\n\nIs there anything else you need?\n> "));
         // OPERATING HOURS 
-        responses.put("hours", Arrays.asList(""));
-        responses.put("operating", Arrays.asList(""));
-        // MENU
-        responses.put("menu", Arrays.asList(""));
-        responses.put("food", Arrays.asList(""));
+        responses.put("hours", Arrays.asList("Kyoto's Finest's operating hours ranges from 11:00 AM to 9:30 PM (JST)\n\nIs there anything else you need?\n> "));
+        responses.put("opening", Arrays.asList("Kyoto's Finest opens at 11:00 AM (JST)\n\nIs there anything else you need?\n> "));
+        responses.put("closing", Arrays.asList("Kyoto's Finest opens at 11:00 AM (JST)\n\nIs there anything else you need?\n> "));
+        // CONTACT
+        responses.put("contact", Arrays.asList("Kyoto's Finest's contact information includes:\n - Telephone number: +81 0123 456 789\n - Email address: kyotosfinest@gmail.com\n - Address: 21 Saiinnakamizucho, Ukyo Ward, Kyoto, 615-0043, Japan\n\nIs there anything else you need?\n> "));
+        responses.put("email", Arrays.asList("Kyoto's Finest's email address is: kyotosfinest@gmail.com\n\nIs there anything else you need?\n> "));
+        responses.put("address", Arrays.asList("Kyoto's Finest's address is: 21 Saiinnakamizucho, Ukyo Ward, Kyoto, 615-0043, Japan\n\nIs there anything else you need?\n> "));
+        responses.put("telephone", Arrays.asList("Kyoto's Finest's telephone number is: +81 0123 456 789\n\nIs there anything else you need?\n> "));
+        responses.put("phone", Arrays.asList("Kyoto's Finest's telephone number is: +81 0123 456 789\n\nIs there anything else you need?\n> "));
+        responses.put("number", Arrays.asList("Kyoto's Finest's telephone number is: +81 0123 456 789\n\nIs there anything else you need?\n> "));
         // RESERVATIONS
         reservations.put("reserve", Arrays.asList("Sure thing {username}! Let me ask you something first though...", "No problem {username}! Let me ask you something first though..."));
         reservations.put("reservation", Arrays.asList("Sure thing {username}! Let me ask you something first though...", "No problem {username}! Let me ask you something first though..."));
-        
+        // MENU
+        menu.put("menu", Arrays.asList(""));
+        menu.put("food", Arrays.asList(""));
         // TABLE PREFERENCE 
         tableCoupleReservation.put("couple", Arrays.asList("Sure thing! Any preferences for your seats?\n", "Of course! Do you have any seating preferences?\n"));
-        tablePartyReservation.put("party", Arrays.asList("How many poeple are attending?\n", "How many people are you reserving for?\n"));
+        tablePartyReservation.put("party", Arrays.asList("How many people are attending?\n", "How many people are you reserving for?\n"));
         //tableCoupleReservationPref
 
         // TABLE PREFERENCE
@@ -106,6 +116,10 @@ public class ChatbotData {
 
     public String[] getReservationsContent(){
         return reservations.keySet().toArray(new String[0]);
+    }
+
+    public String[] getMenuContent(){
+        return menu.keySet().toArray(new String[0]);
     }
 
     public String[] getYesResponsesContent(){
