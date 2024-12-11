@@ -24,43 +24,40 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
             userResponse = userInput.nextLine().toLowerCase().trim();     
             if (attempts == 3) {
                 while (true) {
-                    attempts = 0;
                     clearScreen();
                     showDialogue("It seems you are having trouble, would you like a list of things I can assist you with?\n> ".toCharArray());
                     userResponse = userInput.nextLine().toLowerCase().trim();
                     if (Arrays.asList(chatbotData.getYesResponsesContent()).contains(userResponse)) {
+                        attempts = 0;
                         clearScreen();
                         showDialogue(getResponseStart("list").toCharArray());
                         break;
                     } else if (Arrays.asList(chatbotData.getNoResponsesContent()).contains(userResponse)){
+                        clearScreen();
                         showDialogue(("Thank you "+ getUsername() + " for visiting Kyoto's Finest! Please come again soon!").toCharArray());
                         System.exit(0);
-                    } else {
-                        showDialogue(getBotMessage(0).toCharArray());
-                        //break;
                     }
+                    showDialogue(getBotMessage(0).toCharArray());
                 }
+            } else if (Arrays.asList(chatbotData.getReservationsContent()).contains(userResponse)) {
+                setReservation(chatbotData, userInput);
+                break;
             } else if (!Arrays.asList(chatbotData.getResponsesContent()).contains(userResponse)) {
                 clearScreen();
                 showDialogue(getResponseStart(userResponse).toCharArray());
                 attempts++;
                 continue;
-            } else if (Arrays.asList(chatbotData.getReservationsContent()).contains(userResponse)) {
-                setReservation(chatbotData, userInput);
-                break;
-            } else if (Arrays.asList(chatbotData.getMenuContent()).contains(userResponse)){
-                showMenuOptions();
-                break;
             } else {
                 clearScreen();
                 attempts++;
                 showDialogue(getResponseStart(userResponse).toCharArray());
             }
+            
         }
     }
 
-    public void showMenuOptions() {
-        System.out.println("menu");
+    public void showMenuOptions(ChatbotData chatbotData, Scanner userInput) {
+        System.out.println("Menu (appetizers) \n =>  Edamame \n > INGREDIENTS \n  - sea salt \n  - sesame seed\n =>  vegetable Tempura \n > INGREDIENTS \n  - Japanese sweet potato \n  - Japanese or Chinese eggplant \n  - premade tempura wrapped\n =>  Potstickers \n > INGREDIENTS \n  - ground pork \n  - water chestnuts \n  - baby bok choy \n  - eggs\n =>  Agedashi tofu  \n > INGREDIENTS \n  - Medium-Firm Tofu \n  - Corn Starch \n  - grated Daikon \n  - Bonito Flakes ");
     }
     
     public void setReservation(ChatbotData chatbotData, Scanner userInput){
@@ -114,7 +111,7 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
                     chatbotData.setDateAndTime(dateAndTime);
                     break;
                 }catch(ParseException e){
-                    showDialogue("Incorrect time\n> ".toCharArray());
+                    printErrorMessage("Incorrect time. Please try again");
                 }
             }
             showDialogue("Any special requests?\n> ".toCharArray());

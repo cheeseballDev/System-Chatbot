@@ -9,11 +9,10 @@ import java.util.Set;
 public class ChatbotData {
     private final Set<String> yesResponses;
     private final Set<String> noResponses;
+    private final Set<String> tablePreference;
     private final HashMap<String, List<String>> responses;
-    private final HashMap<String, List<String>> menu;
     private final HashMap<String, List<String>> reservations; 
     private final HashMap<String, List<String>> tableCoupleReservation;
-    private final Set<String> tablePreference;
     private final HashMap<String, List<String>> tablePartyReservation;
     private int partyAmount;
     private String dateAndTime;
@@ -26,11 +25,10 @@ public class ChatbotData {
     public ChatbotData() {
         yesResponses = new HashSet<>();
         noResponses = new HashSet<>();
+        tablePreference = new HashSet<>();
         responses = new HashMap<>();
-        menu = new HashMap<>();
         reservations = new HashMap<>();
         tableCoupleReservation = new HashMap<>();
-        tablePreference = new HashSet<>();
         tablePartyReservation = new HashMap<>();
 
         loadResponses();
@@ -53,18 +51,20 @@ public class ChatbotData {
         noResponses.add("nope");
         noResponses.add("n");
         noResponses.add("not really");
-        yesResponses.add("iie");
+        noResponses.add("iie");
 
         // BASIC RESPONSES
         responses.put("hello", Arrays.asList("Hi {username}! I am BOT Mika. Please check our list by typing list for all of our available choices by typing list.\n> ", "Irasshaimase {username}! I am BOT Mika. Please check our list for all available choices by typing list.\n> "));
         responses.put("hi", Arrays.asList("Konnichiwa {username}! I am BOT Mika. Please check our list by typing list for all of our available choices by typing list.\n> ", "Hello {username}! I am BOT Mika. Please check our list for all available choices by typing list.\n> "));
-        responses.put("list", Arrays.asList("Here's the list of features available!\n> Restaurant description and information\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Contact information\n - Telephone number\n - Email address\n - Address\n\nIs there anything else you need?\n> "));
-        responses.put("features", Arrays.asList("Here's the list of features available!\n> Restaurant description and information\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Contact information\n - Telephone number\n - Email address\n - Address\n\nIs there anything else you need?\n> "));
-        responses.put("help", Arrays.asList("Here's the list of features available!\n> Restaurant description and information\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Contact information\n - Telephone number\n - Email address\n - Address\n\nIs there anything else you need?\n> "));
+        responses.put("list", Arrays.asList("Here's the list of features available!\n> Restaurant description and information\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Contact information\n - Telephone number\n - Email address\n - Address\n\nIs there anything that suits your interest?\n> "));
+        responses.put("features", Arrays.asList("Here's the list of features available!\n> Restaurant description and information\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Contact information\n - Telephone number\n - Email address\n - Address\n\nIs there anything that suits your interest?\n> "));
+        responses.put("help", Arrays.asList("Here's the list of features available!\n> Restaurant description and information\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Contact information\n - Telephone number\n - Email address\n - Address\n\nIs there anything that suits your interest?\n> "));
+        
         // OPERATING HOURS 
         responses.put("hours", Arrays.asList("Kyoto's Finest's operating hours ranges from 11:00 AM to 9:30 PM (JST)\n\nIs there anything else you need?\n> "));
         responses.put("opening", Arrays.asList("Kyoto's Finest opens at 11:00 AM (JST)\n\nIs there anything else you need?\n> "));
         responses.put("closing", Arrays.asList("Kyoto's Finest opens at 11:00 AM (JST)\n\nIs there anything else you need?\n> "));
+        
         // CONTACT
         responses.put("contact", Arrays.asList("Kyoto's Finest's contact information includes:\n - Telephone number: +81 0123 456 789\n - Email address: kyotosfinest@gmail.com\n - Address: 21 Saiinnakamizucho, Ukyo Ward, Kyoto, 615-0043, Japan\n\nIs there anything else you need?\n> "));
         responses.put("email", Arrays.asList("Kyoto's Finest's email address is: kyotosfinest@gmail.com\n\nIs there anything else you need?\n> "));
@@ -72,15 +72,23 @@ public class ChatbotData {
         responses.put("telephone", Arrays.asList("Kyoto's Finest's telephone number is: +81 0123 456 789\n\nIs there anything else you need?\n> "));
         responses.put("phone", Arrays.asList("Kyoto's Finest's telephone number is: +81 0123 456 789\n\nIs there anything else you need?\n> "));
         responses.put("number", Arrays.asList("Kyoto's Finest's telephone number is: +81 0123 456 789\n\nIs there anything else you need?\n> "));
+        
+        // MENU
+        responses.put("menu", Arrays.asList("Menu (appetizers)\n =>  Edamame \n > INGREDIENTS \n  - sea salt \n  - sesame seed\n =>  vegetable Tempura \n > INGREDIENTS\n  - Japanese sweet potato \n  - Japanese or Chinese eggplant \n  - premade tempura wrapped\n =>  Potstickers\n > INGREDIENTS \n  - ground pork \n  - water chestnuts \n  - baby bok choy \n  - eggs\n =>  Agedashi tofu\n > INGREDIENTS \n  - Medium-Firm Tofu \n  - Corn Starch \n  - grated Daikon \n  - Bonito Flakes\n\nMenu (Sushi maki)\n =>  Philadelphia \n > INGREDIENTS \n  - Fresh salmon \n  - Cream cheese \n  - Avocado\n =>  Negi-hama \n > INGREDIENTS \n  - Yellowtail \n  - Scallions \n  - Seasame seed\n =>  Crunchy Roll \n > INGREDIENTS \n  - Crab \n  - Cucumber \n  - Avocado \n  - Red tuna \n  - Salmon \n  - White tuna \n  - Tempura flake \n  - Masago\n =>  Green Dragon \n > INGREDIENTS \n  - Eel \n  - cucumber \n  - crab \n  - mixed salad \n  - avocado\n\nIs there anything else you need? \n> "));
+        responses.put("cuisine", Arrays.asList("Menu (appetizers)\n =>  Edamame \n > INGREDIENTS \n  - sea salt \n  - sesame seed\n =>  vegetable Tempura \n > INGREDIENTS\n  - Japanese sweet potato \n  - Japanese or Chinese eggplant \n  - premade tempura wrapped\n =>  Potstickers\n > INGREDIENTS \n  - ground pork \n  - water chestnuts \n  - baby bok choy \n  - eggs\n =>  Agedashi tofu\n > INGREDIENTS \n  - Medium-Firm Tofu \n  - Corn Starch \n  - grated Daikon \n  - Bonito Flakes\n\nMenu (Sushi maki)\n =>  Philadelphia \n > INGREDIENTS \n  - Fresh salmon \n  - Cream cheese \n  - Avocado\n =>  Negi-hama \n > INGREDIENTS \n  - Yellowtail \n  - Scallions \n  - Seasame seed\n =>  Crunchy Roll \n > INGREDIENTS \n  - Crab \n  - Cucumber \n  - Avocado \n  - Red tuna \n  - Salmon \n  - White tuna \n  - Tempura flake \n  - Masago\n =>  Green Dragon \n > INGREDIENTS \n  - Eel \n  - cucumber \n  - crab \n  - mixed salad \n  - avocado\n\nIs there anything else you need? \n> "));
+        responses.put("food", Arrays.asList("Menu (appetizers)\n =>  Edamame \n > INGREDIENTS \n  - sea salt \n  - sesame seed\n =>  vegetable Tempura \n > INGREDIENTS\n  - Japanese sweet potato \n  - Japanese or Chinese eggplant \n  - premade tempura wrapped\n =>  Potstickers\n > INGREDIENTS \n  - ground pork \n  - water chestnuts \n  - baby bok choy \n  - eggs\n =>  Agedashi tofu\n > INGREDIENTS \n  - Medium-Firm Tofu \n  - Corn Starch \n  - grated Daikon \n  - Bonito Flakes\n\nMenu (Sushi maki)\n =>  Philadelphia \n > INGREDIENTS \n  - Fresh salmon \n  - Cream cheese \n  - Avocado\n =>  Negi-hama \n > INGREDIENTS \n  - Yellowtail \n  - Scallions \n  - Seasame seed\n =>  Crunchy Roll \n > INGREDIENTS \n  - Crab \n  - Cucumber \n  - Avocado \n  - Red tuna \n  - Salmon \n  - White tuna \n  - Tempura flake \n  - Masago\n =>  Green Dragon \n > INGREDIENTS \n  - Eel \n  - cucumber \n  - crab \n  - mixed salad \n  - avocado\n\nIs there anything else you need? \n> "));
+        responses.put("tariff", Arrays.asList("Menu (appetizers)\n =>  Edamame \n > INGREDIENTS \n  - sea salt \n  - sesame seed\n =>  vegetable Tempura \n > INGREDIENTS\n  - Japanese sweet potato \n  - Japanese or Chinese eggplant \n  - premade tempura wrapped\n =>  Potstickers\n > INGREDIENTS \n  - ground pork \n  - water chestnuts \n  - baby bok choy \n  - eggs\n =>  Agedashi tofu\n > INGREDIENTS \n  - Medium-Firm Tofu \n  - Corn Starch \n  - grated Daikon \n  - Bonito Flakes\n\nMenu (Sushi maki)\n =>  Philadelphia \n > INGREDIENTS \n  - Fresh salmon \n  - Cream cheese \n  - Avocado\n =>  Negi-hama \n > INGREDIENTS \n  - Yellowtail \n  - Scallions \n  - Seasame seed\n =>  Crunchy Roll \n > INGREDIENTS \n  - Crab \n  - Cucumber \n  - Avocado \n  - Red tuna \n  - Salmon \n  - White tuna \n  - Tempura flake \n  - Masago\n =>  Green Dragon \n > INGREDIENTS \n  - Eel \n  - cucumber \n  - crab \n  - mixed salad \n  - avocado\n\nIs there anything else you need? \n> "));
+        responses.put("meals", Arrays.asList("Menu (appetizers)\n =>  Edamame \n > INGREDIENTS \n  - sea salt \n  - sesame seed\n =>  vegetable Tempura \n > INGREDIENTS\n  - Japanese sweet potato \n  - Japanese or Chinese eggplant \n  - premade tempura wrapped\n =>  Potstickers\n > INGREDIENTS \n  - ground pork \n  - water chestnuts \n  - baby bok choy \n  - eggs\n =>  Agedashi tofu\n > INGREDIENTS \n  - Medium-Firm Tofu \n  - Corn Starch \n  - grated Daikon \n  - Bonito Flakes\n\nMenu (Sushi maki)\n =>  Philadelphia \n > INGREDIENTS \n  - Fresh salmon \n  - Cream cheese \n  - Avocado\n =>  Negi-hama \n > INGREDIENTS \n  - Yellowtail \n  - Scallions \n  - Seasame seed\n =>  Crunchy Roll \n > INGREDIENTS \n  - Crab \n  - Cucumber \n  - Avocado \n  - Red tuna \n  - Salmon \n  - White tuna \n  - Tempura flake \n  - Masago\n =>  Green Dragon \n > INGREDIENTS \n  - Eel \n  - cucumber \n  - crab \n  - mixed salad \n  - avocado\n\nIs there anything else you need? \n> "));
+        responses.put("dishes", Arrays.asList("Menu (appetizers)\n =>  Edamame \n > INGREDIENTS \n  - sea salt \n  - sesame seed\n =>  vegetable Tempura \n > INGREDIENTS\n  - Japanese sweet potato \n  - Japanese or Chinese eggplant \n  - premade tempura wrapped\n =>  Potstickers\n > INGREDIENTS \n  - ground pork \n  - water chestnuts \n  - baby bok choy \n  - eggs\n =>  Agedashi tofu\n > INGREDIENTS \n  - Medium-Firm Tofu \n  - Corn Starch \n  - grated Daikon \n  - Bonito Flakes\n\nMenu (Sushi maki)\n =>  Philadelphia \n > INGREDIENTS \n  - Fresh salmon \n  - Cream cheese \n  - Avocado\n =>  Negi-hama \n > INGREDIENTS \n  - Yellowtail \n  - Scallions \n  - Seasame seed\n =>  Crunchy Roll \n > INGREDIENTS \n  - Crab \n  - Cucumber \n  - Avocado \n  - Red tuna \n  - Salmon \n  - White tuna \n  - Tempura flake \n  - Masago\n =>  Green Dragon \n > INGREDIENTS \n  - Eel \n  - cucumber \n  - crab \n  - mixed salad \n  - avocado\n\nIs there anything else you need? \n> "));
+
         // RESERVATIONS
         reservations.put("reserve", Arrays.asList("Sure thing {username}! Let me ask you something first though...", "No problem {username}! Let me ask you something first though..."));
         reservations.put("reservation", Arrays.asList("Sure thing {username}! Let me ask you something first though...", "No problem {username}! Let me ask you something first though..."));
-        // MENU
-        menu.put("menu", Arrays.asList(""));
-        menu.put("food", Arrays.asList(""));
+        
         // TABLE PREFERENCE 
         tableCoupleReservation.put("couple", Arrays.asList("Sure thing! Any preferences for your seats?\n", "Of course! Do you have any seating preferences?\n"));
         tablePartyReservation.put("party", Arrays.asList("How many people are attending?\n", "How many people are you reserving for?\n"));
+        
         //tableCoupleReservationPref
 
         // TABLE PREFERENCE
@@ -91,10 +99,6 @@ public class ChatbotData {
         tablePreference.add("booth");
         tablePreference.add("near entrance");
         tablePreference.add("quiet area");
-
-        /*
-         * add opening hours, operaitng hours, menu, address, list/features
-         */
     }
 
 
@@ -116,10 +120,6 @@ public class ChatbotData {
 
     public String[] getReservationsContent(){
         return reservations.keySet().toArray(new String[0]);
-    }
-
-    public String[] getMenuContent(){
-        return menu.keySet().toArray(new String[0]);
     }
 
     public String[] getYesResponsesContent(){
