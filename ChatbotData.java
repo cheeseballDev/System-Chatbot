@@ -43,6 +43,7 @@ public class ChatbotData {
         yesResponses.add("ok");
         yesResponses.add("hai");
         yesResponses.add("yur");
+        yesResponses.add("yes");
 
         // NO
         noResponses.add("no");
@@ -53,10 +54,10 @@ public class ChatbotData {
         yesResponses.add("iie");
 
         // BASIC RESPONSES
-        responses.put("hello", Arrays.asList("Hi! I am BOT Mika. Please check our list by typing list for all of our available choices.\n> ", "Irasshaimase! I am BOT Mika. Please check our list for all available choices.\n> "));
-        responses.put("hi", Arrays.asList("Konnichiwa! I am BOT Mika. Please check our list by typing list for all of our available choices.\n> ", "Hello! I am BOT Mika. Please check our list for all available choices.\n> "));
-        responses.put("list", Arrays.asList("Here's the list of features available!\n> Restaurant description and information\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Contact information\n - Telephone number\n - Email address\n - Address\n What else do you need?\n"));
-        responses.put("features", Arrays.asList("Here's the list of features available!\n> Restaurant description and information\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Contact information\n - Telephone number\n - Email address\n - Address"));
+        responses.put("hello", Arrays.asList("Hi {username}! I am BOT Mika. Please check our list by typing list for all of our available choices.\n> ", "Irasshaimase {username}! I am BOT Mika. Please check our list for all available choices.\n> "));
+        responses.put("hi", Arrays.asList("Konnichiwa {username}! I am BOT Mika. Please check our list by typing list for all of our available choices.\n> ", "Hello {username}! I am BOT Mika. Please check our list for all available choices.\n> "));
+        responses.put("list", Arrays.asList("Here's the list of features available!\n> Restaurant description and information\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Contact information\n - Telephone number\n - Email address\n - Address\n\nWhat else do you need?\n> "));
+        responses.put("features", Arrays.asList("Here's the list of features available!\n> Restaurant description and information\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Contact information\n - Telephone number\n - Email address\n - Address\n\nWhat else do you need?\n> "));
         // OPERATING HOURS 
         responses.put("hours", Arrays.asList(""));
         responses.put("operating", Arrays.asList(""));
@@ -64,8 +65,8 @@ public class ChatbotData {
         responses.put("menu", Arrays.asList(""));
         responses.put("food", Arrays.asList(""));
         // RESERVATIONS
-        reservations.put("reserve", Arrays.asList("Sure thing! Let me ask you something first though...", "Alrighty then! Let me ask you something first though..."));
-        reservations.put("reservation", Arrays.asList("Sure thing! Let me ask you something first though...", "Alrighty then! Let me ask you something first though..."));
+        reservations.put("reserve", Arrays.asList("Sure thing {username}! Let me ask you something first though...", "No problem {username}! Let me ask you something first though..."));
+        reservations.put("reservation", Arrays.asList("Sure thing {username}! Let me ask you something first though...", "No problem {username}! Let me ask you something first though..."));
         
         // TABLE PREFERENCE 
         tableCoupleReservation.put("couple", Arrays.asList("Sure thing! Any preferences for your seats?\n", "Of course! Do you have any seating preferences?\n"));
@@ -86,12 +87,13 @@ public class ChatbotData {
          */
     }
 
+
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUsername(String newUsername) {
+        this.username = newUsername;
     }
     
     public String getBotMessage(int number) {
@@ -102,27 +104,27 @@ public class ChatbotData {
         return responses.keySet().toArray(new String[0]);
     }
 
-    public String[] getReservationsContents(){
+    public String[] getReservationsContent(){
         return reservations.keySet().toArray(new String[0]);
     }
 
-    public String[] getYesResponsesContents(){
+    public String[] getYesResponsesContent(){
         return yesResponses.toArray(new String[0]);
     }
 
-    public String[] getNoResponsesContents(){
+    public String[] getNoResponsesContent(){
         return noResponses.toArray(new String[0]);
     }
 
-    public String[] getTableCoupleReservationContents(){
+    public String[] getTableCoupleReservationContent(){
         return tableCoupleReservation.keySet().toArray(new String[0]);
     }
 
-    public String[] getCoupleTablePreferenceContents(){
+    public String[] getCoupleTablePreferenceContent(){
         return tablePreference.toArray(new String[0]);
     }
 
-    public String[] getTablePartyReservationContents(){
+    public String[] getTablePartyReservationContent(){
         return tablePartyReservation.keySet().toArray(new String[0]);
     }
 
@@ -142,11 +144,11 @@ public class ChatbotData {
         this.dateAndTime = dateAndTime;
     }
 
-    public void setSpecialRequests(String specialRequests){
+    public void setSpecialRequest(String specialRequests){
         this.specialRequests = specialRequests;
     }
     
-    public String getSpecialRequests(){
+    public String getSpecialRequest(){
         return specialRequests;
     }
 
@@ -159,14 +161,14 @@ public class ChatbotData {
             if (userResponse.toLowerCase().contains(chatContent)) {
                     List<String> chat = responses.get(chatContent);
                     Random rng = new Random();
-                    return chat.get(rng.nextInt(chat.size()));
+                    return chat.get(rng.nextInt(chat.size())).replace("{username}", username);
                 }
             }
         for (String chatContent : reservations.keySet()){
             if (userResponse.toLowerCase().contains(chatContent)) {
                     List<String> chat = reservations.get(chatContent);
                     Random rng = new Random();
-                    return chat.get(rng.nextInt(chat.size()));
+                    return chat.get(rng.nextInt(chat.size())).replace("{username}", username);
                 }
             }
         return botMessage[0];
@@ -177,7 +179,7 @@ public class ChatbotData {
             if (userResponse.toLowerCase().contains(chatReservationContent)) {
                     List<String> chat = reservations.get(chatReservationContent);
                     Random rng = new Random();
-                    return chat.get(rng.nextInt(chat.size()));
+                    return chat.get(rng.nextInt(chat.size())).replace("{username}", username);
                 }
             }  
         return botMessage[0];
