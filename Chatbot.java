@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
 
     private int attempts = 0;
+    private String name;
 
     public Chatbot() {
         clearScreen();

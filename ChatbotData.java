@@ -20,6 +20,7 @@ public class ChatbotData {
     private String specialRequests;
     
     private String[] botMessage = new String[10];
+    private String username;
 
     public ChatbotData() {
         yesResponses = new HashSet<>();
@@ -45,32 +46,52 @@ public class ChatbotData {
         yesResponses.add("sure");
         yesResponses.add("okay");
         yesResponses.add("ok");
+        yesResponses.add("hai");
 
         noResponses.add("no");
         noResponses.add("nah");
         noResponses.add("nope");
         noResponses.add("n");
-        noResponses.add("never");
+        noResponses.add("not really");
+        yesResponses.add("iie");
 
-        responses.put("hello", Arrays.asList("Hi! I am BOT Mika. Please check our list by typing list for all of our available choices.\n> ", "Irasshaimase! I am BOT Mika. Please check our list for all available choices.\n> "));
-        responses.put("hi", Arrays.asList("Konnichiwa! I am BOT Mika. Please check our list by typing list for all of our available choices.\n> ", "Hello! I am BOT Mika. Please check our list for all available choices.\n> "));
+        responses.put("hello", Arrays.asList("Hi! I am BOT Mika. Please check our list by typing list for all of our available choices.\n> ", "Irasshaimase! I am BOT Mika. Please check our list of features for all available choices.\n> "));
+        responses.put("hi", Arrays.asList("Konnichiwa! I am BOT Mika. Please check our list by typing list for all of our available choices.\n> ", "Hello! I am BOT Mika. Please check our list of features for all available choices.\n> "));
+        // LIST
         responses.put("list", Arrays.asList("Here's the list of features available!\n> Restaurant description and information\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Contact information\n - Telephone number\n - Email address\n - Address"));
         responses.put("features", Arrays.asList("Here's the list of features available!\n> Restaurant description and information\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Contact information\n - Telephone number\n - Email address\n - Address"));
-
+        // OPERATING HOURS
+        responses.put("hours", Arrays.asList(""));
+        responses.put("operating", Arrays.asList(""));
+        // MENU
+        responses.put("menu", Arrays.asList(""));
+        responses.put("food", Arrays.asList("");
+        // RESERVATION
         reservations.put("reserve", Arrays.asList("Would you like to book a reservation?", "test 2"));
         reservations.put("reservation", Arrays.asList("test2", "test"));
-        
+        // NEW 
         ifNewCustomerResponse.put("yes", Arrays.asList("test", "test2"));
+        // OLD
         ifOldCustomerResponse.put("no", Arrays.asList("Table for a couple or for a party?\n", "Reserving for what purpose?\n"));
+        // COUPLE
         tableCoupleReservation.put("couple", Arrays.asList("test1", "test2"));
+        // PARTY
         tablePartyReservation.put("party", Arrays.asList("How many poeple are attending?\n", "How many people are you reserving for?\n"));
         //tableCoupleReservationPref
-
+        
 
 
         /*
          * add opening hours, operaitng hours, menu, address, list/features
          */
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getBotMessage(int number) {
