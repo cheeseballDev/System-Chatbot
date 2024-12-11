@@ -14,10 +14,11 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
 
     public void runChatbot() {
         ChatbotData chatbotData = new ChatbotData();
-        Scanner userInput = new Scanner(System.in);
-
-        showDialogue("Welcome to Kyoto's Finest! I am BOT Mika, may I have your name please?\n> ".toCharArray());
         String userResponse;
+        Scanner userInput = new Scanner(System.in);
+        showDialogue("Welcome to Kyoto's Finest! I am BOT Mika, may I have your name please?\n> ".toCharArray());
+        setUsername(userInput.nextLine());
+        showDialogue(("Welcome " + getUsername()).toCharArray());
         while (true) {
             while (attempts != 4) {       
                 userResponse = userInput.nextLine().toLowerCase().trim();     
@@ -27,27 +28,21 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
                     attempts++;
                     continue;
                 } else if (attempts == 3) {
-                    /*
-                     * for prompt
-                     */
+                    showDialogue("\nWould you like a list of things I can assist you with?\n> ".toCharArray());
+                    userResponse = userInput.nextLine().toLowerCase().trim();
+                    if (Arrays.asList(chatbotData.getYesResponsesContents()).contains(userResponse)) {
+                        attempts = 0;
+                        continue;
+                    } else if (Arrays.asList(chatbotData.getNoResponsesContents()).contains(userResponse)){
+                        showDialogue("Thank you for visiting Kyoto's Finest! Please come again soon!".toCharArray());
+                        System.exit(0);
+                    } else {
+                        showDialogue(getBotMessage(0).toCharArray());
+                    }
                 }
                 clearScreen();
                 showDialogue(getResponseStart(userResponse).toCharArray());
                 reservation(chatbotData, userInput);
-            }
-            clearScreen();
-            showDialogue("Would you like a list of things I can assist you with?\n> ".toCharArray());
-            userResponse = userInput.nextLine().toLowerCase().trim();
-
-            // add to prompt
-            if (Arrays.asList(chatbotData.getYesResponsesContents()).contains(userResponse)) {
-                attempts = 0;
-                runChatbot();
-            } else if (Arrays.asList(chatbotData.getNoResponsesContents()).contains(userResponse)){
-                showDialogue("Thank you for visiting Kyoto's Finest! Please come again soon!".toCharArray());
-                System.exit(0);
-            } else {
-                showDialogue(getBotMessage(0).toCharArray());
             }
         }
     }
@@ -64,18 +59,6 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
             }
         }     
     }
-
-    /* 
-    public void ifNewCustomer(ChatbotData chatbotData, Scanner userInput){
-        System.out.println("New customer?");
-        String userResponse = userInput.nextLine().toLowerCase();
-        if(Arrays.asList(chatbotData.ifNewCustomerResponseContents()).contains(userResponse)){
-            showDialogue(getIfNewCustomerResponse(userResponse).toCharArray());
-        }else{
-            showDialogue(getIfNewCustomerResponse(userResponse).toCharArray());
-        }
-    }
-    */
 
     public void ifNewCustomer(ChatbotData chatbotData, Scanner userInput){
         while(true){

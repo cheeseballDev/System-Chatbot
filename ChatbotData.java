@@ -10,9 +10,7 @@ public class ChatbotData {
     private final Set<String> yesResponses;
     private final Set<String> noResponses;
     private final HashMap<String, List<String>> responses;
-    private final HashMap<String, List<String>> reservations;
-    private final HashMap<String, List<String>> ifNewCustomerResponse;
-    private final HashMap<String, List<String>> ifOldCustomerResponse;
+    private final HashMap<String, List<String>> reservations; 
     private final HashMap<String, List<String>> tableCoupleReservation;
     private final Set<String> tablePreference;
     private final HashMap<String, List<String>> tablePartyReservation;
@@ -29,8 +27,6 @@ public class ChatbotData {
         noResponses = new HashSet<>();
         responses = new HashMap<>();
         reservations = new HashMap<>();
-        ifNewCustomerResponse = new HashMap<>();
-        ifOldCustomerResponse = new HashMap<>();
         tableCoupleReservation = new HashMap<>();
         tablePreference = new HashSet<>();
         tablePartyReservation = new HashMap<>();
@@ -41,11 +37,14 @@ public class ChatbotData {
     }
 
     private void loadResponses() {
+        // YES
         yesResponses.add("sure");
         yesResponses.add("okay");
         yesResponses.add("ok");
         yesResponses.add("hai");
+        yesResponses.add("yur");
 
+        // NO
         noResponses.add("no");
         noResponses.add("nah");
         noResponses.add("nope");
@@ -53,6 +52,7 @@ public class ChatbotData {
         noResponses.add("not really");
         yesResponses.add("iie");
 
+        // BASIC RESPONSES
         responses.put("hello", Arrays.asList("Hi! I am BOT Mika. Please check our list by typing list for all of our available choices.\n> ", "Irasshaimase! I am BOT Mika. Please check our list for all available choices.\n> "));
         responses.put("hi", Arrays.asList("Konnichiwa! I am BOT Mika. Please check our list by typing list for all of our available choices.\n> ", "Hello! I am BOT Mika. Please check our list for all available choices.\n> "));
         responses.put("list", Arrays.asList("Here's the list of features available!\n> Restaurant description and information\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Contact information\n - Telephone number\n - Email address\n - Address\n What else do you need?\n"));
@@ -67,9 +67,12 @@ public class ChatbotData {
         reservations.put("reserve", Arrays.asList("Sure thing! Let me ask you something first though...", "Alrighty then! Let me ask you something first though..."));
         reservations.put("reservation", Arrays.asList("Sure thing! Let me ask you something first though...", "Alrighty then! Let me ask you something first though..."));
         
-        ifNewCustomerResponse.put("yes", Arrays.asList("test", "test2"));
-        ifOldCustomerResponse.put("no", Arrays.asList("I see... Glad you're still with us then!\nTable for a couple or for a party?\n", "I see... Glad you're still with us then! What is the purpose of your reservation?\n"));
+        // TABLE PREFERENCE 
         tableCoupleReservation.put("couple", Arrays.asList("Sure thing! Any preferences for your seats?\n", "Of course! Do you have any seating preferences?\n"));
+        tablePartyReservation.put("party", Arrays.asList("How many poeple are attending?\n", "How many people are you reserving for?\n"));
+        //tableCoupleReservationPref
+
+        // TABLE PREFERENCE
         tablePreference.add("window");
         tablePreference.add("windowed");
         tablePreference.add("aisle");
@@ -77,9 +80,6 @@ public class ChatbotData {
         tablePreference.add("booth");
         tablePreference.add("near entrance");
         tablePreference.add("quiet area");
-
-        tablePartyReservation.put("party", Arrays.asList("How many poeple are attending?\n", "How many people are you reserving for?\n"));
-        //tableCoupleReservationPref
 
         /*
          * add opening hours, operaitng hours, menu, address, list/features
@@ -114,14 +114,6 @@ public class ChatbotData {
         return noResponses.toArray(new String[0]);
     }
 
-    public String[] getIfNewCustomerResponseContents(){
-        return ifNewCustomerResponse.keySet().toArray(new String[0]);
-    }
-
-    public String[] getIfOldCustomerResponseContents(){
-        return ifOldCustomerResponse.keySet().toArray(new String[0]);
-    }
-
     public String[] getTableCoupleReservationContents(){
         return tableCoupleReservation.keySet().toArray(new String[0]);
     }
@@ -142,12 +134,12 @@ public class ChatbotData {
         return partyAmount;
     }
 
-    public void setDateAndTime(String dateAndTime){
-        this.dateAndTime = dateAndTime;
-    }
-
     public String getDateAndTime(){
         return dateAndTime;
+    }
+
+    public void setDateAndTime(String dateAndTime){
+        this.dateAndTime = dateAndTime;
     }
 
     public void setSpecialRequests(String specialRequests){
@@ -191,28 +183,6 @@ public class ChatbotData {
         return botMessage[0];
     }
 
-    public String getIfNewCustomerResponse(String userResponse){
-        for (String chatNewCustomerContent : ifNewCustomerResponse.keySet()){
-            if (userResponse.toLowerCase().contains(chatNewCustomerContent)) {
-                    List<String> chat = ifNewCustomerResponse.get(chatNewCustomerContent);
-                    Random rng = new Random();
-                    return chat.get(rng.nextInt(chat.size()));
-                }
-            }  
-        return botMessage[0];
-    }
-
-    public String getIfNotNewCustomerResponse(String userResponse){
-        for (String chatNotNewCustomerContent : ifOldCustomerResponse.keySet()){
-            if (userResponse.toLowerCase().contains(chatNotNewCustomerContent)) {
-                    List<String> chat = ifOldCustomerResponse.get(chatNotNewCustomerContent);
-                    Random rng = new Random();
-                    return chat.get(rng.nextInt(chat.size()));
-                }
-            }  
-        return botMessage[0];
-    }
-
     public String getTableCoupleReseravationResponse(String userResponse){
         for (String chatTableCoupleContent : tableCoupleReservation.keySet()){
             if (userResponse.toLowerCase().contains(chatTableCoupleContent)) {
@@ -231,7 +201,7 @@ public class ChatbotData {
             }
         }
     }
-    
+
     public String getTablePartyReseravationResponse(String userResponse){
         for (String chatTablePartyContent : tablePartyReservation.keySet()){
             if (userResponse.toLowerCase().contains(chatTablePartyContent)) {
