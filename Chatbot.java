@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
 
     private int attempts = 0;
-    private String name;
 
     public Chatbot() {
         clearScreen();
@@ -17,7 +16,7 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
         ChatbotData chatbotData = new ChatbotData();
         Scanner userInput = new Scanner(System.in);
 
-        showDialogue("Welcome to Kyoto's Finest! I am BOT Mika, how many I help you today?\n> ".toCharArray());
+        showDialogue("Welcome to Kyoto's Finest! I am BOT Mika, may I have your name please?\n> ".toCharArray());
         String userResponse;
         while (true) {
             while (attempts != 4) {       
@@ -80,7 +79,7 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
 
     public void ifNewCustomer(ChatbotData chatbotData, Scanner userInput){
         while(true){
-            System.out.println("\nAre you a new to this restaurant?");
+            System.out.println("\nNew customer?");
             String userResponse = userInput.nextLine().toLowerCase().trim();  
             if (Arrays.asList(chatbotData.getIfNewCustomerResponseContents()).contains(userResponse)) {
                 showDialogue(getIfNewCustomerResponse(userResponse).toCharArray());
@@ -110,60 +109,8 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
     }
 
     public void tableCouple(ChatbotData chatbotData, Scanner userInput){
-        while(true){
-            String userResponse = userInput.nextLine().toLowerCase().trim();
-            if(!Arrays.asList(chatbotData.getCoupleTablePreferenceContents()).contains(userResponse)){
-                showDialogue(getBotMessage(0).toCharArray());
-            }
 
-            if(Arrays.asList(chatbotData.getCoupleTablePreferenceContents()).contains(userResponse)){
-                chatbotData.getCoupleTablePreference(userResponse);
-                showDialogue("Date and time?\n".toCharArray());
-                while(true){
-                String dateAndTime = userInput.nextLine();
-                try{
-                    SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy HH:mm");
-                    format.parse(dateAndTime);
-                    chatbotData.setDateAndTime(dateAndTime);
-                    break;
-                }catch(ParseException e){
-                    showDialogue("Incorrect time\n".toCharArray());
-                }
-            }
-            }
-            showDialogue("Any special touches like flowers or something?\n".toCharArray());
-            while(true){
-                if (Arrays.asList(chatbotData.getYesResponsesContents()).contains(userResponse)) {
-                    showDialogue("What would they be?\n".toCharArray());
-                    String specialRequests = userInput.nextLine();
-                    chatbotData.setSpecialRequests(specialRequests);
-                    tablePartyConfirmation(chatbotData, userInput);
-                } else if (Arrays.asList(chatbotData.getNoResponsesContents()).contains(userResponse)){
-                    showDialogue("Alright! Sending you to table reservation page now!\n".toCharArray());
-                    tableCoupleConfirmation(chatbotData, userInput);
-                } else {
-                    showDialogue(getBotMessage(0).toCharArray());
-                }
-                }
-            }
-        }
-    
-    public void tableCoupleConfirmation(ChatbotData chatbotData, Scanner userInput){
-        showDialogue(("You are reserving a couple's table with preference in the part of " + chatbotData.getCoupleTablePreference() + " set at " + chatbotData.getDateAndTime() + " with an additional request(s) of " + chatbotData.getSpecialRequests() +  " . Is this correct?\n").toCharArray());
-        while (true) {
-            String userResponse = userInput.nextLine().toLowerCase().trim();
-            if (Arrays.asList(chatbotData.getYesResponsesContents()).contains(userResponse)) {
-                showDialogue("Alright! Your table is now reserved, please show up at the alloted time and enjoy your date!".toCharArray());
-                System.exit(0);
-            } else if (Arrays.asList(chatbotData.getNoResponsesContents()).contains(userResponse)){
-                showDialogue("Understood, sending you back to table settings.".toCharArray());
-                tableParty(chatbotData, userInput);
-            } else {
-                showDialogue(getBotMessage(0).toCharArray());
-            }
-            }
     }
-        
 
     public void tableParty(ChatbotData chatbotData, Scanner userInput){
         while(true){

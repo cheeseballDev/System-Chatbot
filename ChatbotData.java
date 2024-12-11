@@ -57,11 +57,13 @@ public class ChatbotData {
         responses.put("hi", Arrays.asList("Konnichiwa! I am BOT Mika. Please check our list by typing list for all of our available choices.\n> ", "Hello! I am BOT Mika. Please check our list for all available choices.\n> "));
         responses.put("list", Arrays.asList("Here's the list of features available!\n> Restaurant description and information\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Contact information\n - Telephone number\n - Email address\n - Address\n What else do you need?\n"));
         responses.put("features", Arrays.asList("Here's the list of features available!\n> Restaurant description and information\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Contact information\n - Telephone number\n - Email address\n - Address"));
+        // OPERATING HOURS 
         responses.put("hours", Arrays.asList(""));
         responses.put("operating", Arrays.asList(""));
+        // MENU
         responses.put("menu", Arrays.asList(""));
         responses.put("food", Arrays.asList(""));
-
+        // RESERVATIONS
         reservations.put("reserve", Arrays.asList("Sure thing! Let me ask you something first though...", "Alrighty then! Let me ask you something first though..."));
         reservations.put("reservation", Arrays.asList("Sure thing! Let me ask you something first though...", "Alrighty then! Let me ask you something first though..."));
         
@@ -78,8 +80,6 @@ public class ChatbotData {
 
         tablePartyReservation.put("party", Arrays.asList("How many poeple are attending?\n", "How many people are you reserving for?\n"));
         //tableCoupleReservationPref
-
-
 
         /*
          * add opening hours, operaitng hours, menu, address, list/features
@@ -158,6 +158,10 @@ public class ChatbotData {
         return specialRequests;
     }
 
+    public String getCoupleTablePreference(){
+        return tablePreferenceString;
+    }
+
     public String getResponseStart(String userResponse) {
         for (String chatContent : responses.keySet()){
             if (userResponse.toLowerCase().contains(chatContent)) {
@@ -173,8 +177,6 @@ public class ChatbotData {
                     return chat.get(rng.nextInt(chat.size()));
                 }
             }
-        //return responses.getOrDefault(userResponse.toLowerCase().trim(), "I did not understand what you said.\nCan you please repeat that?");
-        // This if statement checks whether the user is struggling
         return botMessage[0];
     }
 
@@ -229,10 +231,6 @@ public class ChatbotData {
             }
         }
     }
-
-    public String getCoupleTablePreference(){
-        return tablePreferenceString;
-    }
     
     public String getTablePartyReseravationResponse(String userResponse){
         for (String chatTablePartyContent : tablePartyReservation.keySet()){
@@ -244,7 +242,4 @@ public class ChatbotData {
             }  
         return botMessage[0];
     }
-
-
-    
 }
