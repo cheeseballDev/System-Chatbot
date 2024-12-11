@@ -47,55 +47,45 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
         }
     }
     
-    public void reservation(ChatbotData chatbotData, Scanner userInput){
+    public void setReservation(ChatbotData chatbotData, Scanner userInput){
         attempts = 0;
         while (true) {            
             String userResponse = userInput.nextLine().toLowerCase().trim();
             if(Arrays.asList(chatbotData.getReservationsContents()).contains(userResponse)){
                 showDialogue(getReservationResponse(userResponse).toCharArray());
-                ifNewCustomer(chatbotData, userInput);
+                setNewCustomer(chatbotData, userInput);
             }else{
                 showDialogue(getReservationResponse(userResponse).toCharArray());
             }
         }     
     }
 
-    public void ifNewCustomer(ChatbotData chatbotData, Scanner userInput){
-        while(true){
-            System.out.println("\nNew customer?");
-            String userResponse = userInput.nextLine().toLowerCase().trim();  
-            if (Arrays.asList(chatbotData.getIfNewCustomerResponseContents()).contains(userResponse)) {
-                showDialogue(getIfNewCustomerResponse(userResponse).toCharArray());
-                System.exit(0);
-            } else if (Arrays.asList(chatbotData.getIfOldCustomerResponseContents()).contains(userResponse)){
-                showDialogue(getIfNotNewCustomerResponse(userResponse).toCharArray());
-                tableReservation(chatbotData, userInput);
-            } else {
-                showDialogue(getBotMessage(0).toCharArray());
-            }
-        }
+    public void setNewCustomer(ChatbotData chatbotData, Scanner userInput){
+        /*
+         *  TBA
+         */
     }
 
-    public void tableReservation(ChatbotData chatbotData, Scanner userInput){
+    public void setTableReservation(ChatbotData chatbotData, Scanner userInput){
         while(true){
             String userResponse = userInput.nextLine().toLowerCase().trim();
             if (Arrays.asList(chatbotData.getTableCoupleReservationContents()).contains(userResponse)) {
                 showDialogue(getTableCoupleReseravationResponse(userResponse).toCharArray());
-                tableCouple(chatbotData, userInput);
+                setTableCouple(chatbotData, userInput);
             } else if (Arrays.asList(chatbotData.getTablePartyReservationContents()).contains(userResponse)){
                 showDialogue(getTablePartyReseravationResponse(userResponse).toCharArray());
-                tableParty(chatbotData, userInput);
+                setTableParty(chatbotData, userInput);
             } else {
                 showDialogue(getBotMessage(0).toCharArray());
             }
         }
     }
 
-    public void tableCouple(ChatbotData chatbotData, Scanner userInput){
+    public void setTableCouple(ChatbotData chatbotData, Scanner userInput){
 
     }
 
-    public void tableParty(ChatbotData chatbotData, Scanner userInput){
+    public void setTableParty(ChatbotData chatbotData, Scanner userInput){
         while(true){
             int amount = userInput.nextInt();
             userInput.nextLine();
@@ -119,10 +109,10 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
                 showDialogue("What would they be?\n".toCharArray());
                 String specialRequests = userInput.nextLine();
                 chatbotData.setSpecialRequests(specialRequests);
-                tablePartyConfirmation(chatbotData, userInput);
+                confirmTableParty(chatbotData, userInput);
             } else if (Arrays.asList(chatbotData.getNoResponsesContents()).contains(userResponse)){
                 showDialogue("Alright! Sending you to table reservation page now!\n".toCharArray());
-                tablePartyConfirmation(chatbotData, userInput);
+                confirmTableParty(chatbotData, userInput);
             } else {
                 showDialogue(getBotMessage(0).toCharArray());
             }
@@ -130,7 +120,7 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
         }
     }
 
-    public void tablePartyConfirmation(ChatbotData chatbotData, Scanner userInput){
+    public void confirmTableParty(ChatbotData chatbotData, Scanner userInput){
         showDialogue(("You are reserving a table for " + chatbotData.getPartyAmount() + " people set at " + chatbotData.getDateAndTime() + " with an additional request(s) of " + chatbotData.getSpecialRequests() +  " . Is this correct?\n").toCharArray());
         while (true) {
             String userResponse = userInput.nextLine().toLowerCase().trim();
@@ -139,7 +129,7 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
                 System.exit(0);
             } else if (Arrays.asList(chatbotData.getNoResponsesContents()).contains(userResponse)){
                 showDialogue("Understood, sending you back to table settings.".toCharArray());
-                tableParty(chatbotData, userInput);
+                setTableParty(chatbotData, userInput);
             } else {
                 showDialogue(getBotMessage(0).toCharArray());
             }
@@ -147,6 +137,10 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
     }
 
 
+
+    /*
+     * MISC METHODS
+     */
 
     @Override
     public void run() {
