@@ -112,6 +112,10 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
     public void tableCouple(ChatbotData chatbotData, Scanner userInput){
         while(true){
             String userResponse = userInput.nextLine().toLowerCase().trim();
+            if(!Arrays.asList(chatbotData.getCoupleTablePreferenceContents()).contains(userResponse)){
+                showDialogue(getBotMessage(0).toCharArray());
+            }
+
             if(Arrays.asList(chatbotData.getCoupleTablePreferenceContents()).contains(userResponse)){
                 chatbotData.getCoupleTablePreference(userResponse);
                 showDialogue("Date and time?\n".toCharArray());
@@ -145,7 +149,19 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
         }
     
     public void tableCoupleConfirmation(ChatbotData chatbotData, Scanner userInput){
-        showDialogue("You are reserving a couple's table "); //WIP
+        showDialogue(("You are reserving a couple's table with preference in the part of " + chatbotData.getCoupleTablePreference() + " set at " + chatbotData.getDateAndTime() + " with an additional request(s) of " + chatbotData.getSpecialRequests() +  " . Is this correct?\n").toCharArray());
+        while (true) {
+            String userResponse = userInput.nextLine().toLowerCase().trim();
+            if (Arrays.asList(chatbotData.getYesResponsesContents()).contains(userResponse)) {
+                showDialogue("Alright! Your table is now reserved, please show up at the alloted time and enjoy your date!".toCharArray());
+                System.exit(0);
+            } else if (Arrays.asList(chatbotData.getNoResponsesContents()).contains(userResponse)){
+                showDialogue("Understood, sending you back to table settings.".toCharArray());
+                tableParty(chatbotData, userInput);
+            } else {
+                showDialogue(getBotMessage(0).toCharArray());
+            }
+            }
     }
         
 
