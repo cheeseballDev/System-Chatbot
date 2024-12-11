@@ -22,6 +22,7 @@ public class ChatbotData {
     private String tablePreferenceString;
     
     private String[] botMessage = new String[10];
+    private String username;
 
     public ChatbotData() {
         yesResponses = new HashSet<>();
@@ -40,25 +41,26 @@ public class ChatbotData {
     }
 
     private void loadResponses() {
-        yesResponses.add("yes");
-        yesResponses.add("yeah");
-        yesResponses.add("yuh");
-        yesResponses.add("yep");
-        yesResponses.add("y");
         yesResponses.add("sure");
         yesResponses.add("okay");
         yesResponses.add("ok");
+        yesResponses.add("hai");
 
         noResponses.add("no");
         noResponses.add("nah");
         noResponses.add("nope");
         noResponses.add("n");
-        noResponses.add("never");
+        noResponses.add("not really");
+        yesResponses.add("iie");
 
         responses.put("hello", Arrays.asList("Hi! I am BOT Mika. Please check our list by typing list for all of our available choices.\n> ", "Irasshaimase! I am BOT Mika. Please check our list for all available choices.\n> "));
         responses.put("hi", Arrays.asList("Konnichiwa! I am BOT Mika. Please check our list by typing list for all of our available choices.\n> ", "Hello! I am BOT Mika. Please check our list for all available choices.\n> "));
         responses.put("list", Arrays.asList("Here's the list of features available!\n> Restaurant description and information\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Contact information\n - Telephone number\n - Email address\n - Address\n What else do you need?\n"));
         responses.put("features", Arrays.asList("Here's the list of features available!\n> Restaurant description and information\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Contact information\n - Telephone number\n - Email address\n - Address"));
+        responses.put("hours", Arrays.asList(""));
+        responses.put("operating", Arrays.asList(""));
+        responses.put("menu", Arrays.asList(""));
+        responses.put("food", Arrays.asList(""));
 
         reservations.put("reserve", Arrays.asList("Sure thing! Let me ask you something first though...", "Alrighty then! Let me ask you something first though..."));
         reservations.put("reservation", Arrays.asList("Sure thing! Let me ask you something first though...", "Alrighty then! Let me ask you something first though..."));
@@ -84,6 +86,14 @@ public class ChatbotData {
          */
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    
     public String getBotMessage(int number) {
         return botMessage[number];
     }
