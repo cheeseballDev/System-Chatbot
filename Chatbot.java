@@ -42,7 +42,7 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
                 }
                 clearScreen();
                 showDialogue(getResponseStart(userResponse).toCharArray());
-                reservation(chatbotData, userInput);
+                setReservation(chatbotData, userInput);
             }
         }
     }
