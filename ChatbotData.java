@@ -14,6 +14,7 @@ public class ChatbotData {
     private final HashMap<String, List<String>> ifNewCustomerResponse;
     private final HashMap<String, List<String>> ifOldCustomerResponse;
     private final HashMap<String, List<String>> tableCoupleReservation;
+    private final Set<String> tablePreference;
     private final HashMap<String, List<String>> tablePartyReservation;
     private int partyAmount;
     private String dateAndTime;
@@ -29,6 +30,7 @@ public class ChatbotData {
         ifNewCustomerResponse = new HashMap<>();
         ifOldCustomerResponse = new HashMap<>();
         tableCoupleReservation = new HashMap<>();
+        tablePreference = new HashSet<>();
         tablePartyReservation = new HashMap<>();
 
         loadResponses();
@@ -54,15 +56,23 @@ public class ChatbotData {
 
         responses.put("hello", Arrays.asList("Hi! I am BOT Mika. Please check our list by typing list for all of our available choices.\n> ", "Irasshaimase! I am BOT Mika. Please check our list for all available choices.\n> "));
         responses.put("hi", Arrays.asList("Konnichiwa! I am BOT Mika. Please check our list by typing list for all of our available choices.\n> ", "Hello! I am BOT Mika. Please check our list for all available choices.\n> "));
-        responses.put("list", Arrays.asList("Here's the list of features available!\n> Restaurant description and information\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Contact information\n - Telephone number\n - Email address\n - Address"));
+        responses.put("list", Arrays.asList("Here's the list of features available!\n> Restaurant description and information\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Contact information\n - Telephone number\n - Email address\n - Address\n What else do you need?\n"));
         responses.put("features", Arrays.asList("Here's the list of features available!\n> Restaurant description and information\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Contact information\n - Telephone number\n - Email address\n - Address"));
 
-        reservations.put("reserve", Arrays.asList("Would you like to book a reservation?", "test 2"));
-        reservations.put("reservation", Arrays.asList("test2", "test"));
+        reservations.put("reserve", Arrays.asList("Sure thing! Let me ask you something first though...", "Alrighty then! Let me ask you something first though..."));
+        reservations.put("reservation", Arrays.asList("Sure thing! Let me ask you something first though...", "Alrighty then! Let me ask you something first though..."));
         
         ifNewCustomerResponse.put("yes", Arrays.asList("test", "test2"));
-        ifOldCustomerResponse.put("no", Arrays.asList("Table for a couple or for a party?\n", "Reserving for what purpose?\n"));
-        tableCoupleReservation.put("couple", Arrays.asList("test1", "test2"));
+        ifOldCustomerResponse.put("no", Arrays.asList("I see... Glad you're still with us then!\nTable for a couple or for a party?\n", "I see... Glad you're still with us then! What is the purpose of your reservation?\n"));
+        tableCoupleReservation.put("couple", Arrays.asList("Sure thing! Any preferences for your seats?\n", "Of course! Do you have any seating preferences?\n"));
+        tablePreference.add("window");
+        tablePreference.add("windowed");
+        tablePreference.add("aisle");
+        tablePreference.add("corner");
+        tablePreference.add("booth");
+        tablePreference.add("near entrance");
+        tablePreference.add("quiet area");
+
         tablePartyReservation.put("party", Arrays.asList("How many poeple are attending?\n", "How many people are you reserving for?\n"));
         //tableCoupleReservationPref
 
@@ -103,6 +113,10 @@ public class ChatbotData {
 
     public String[] getTableCoupleReservationContents(){
         return tableCoupleReservation.keySet().toArray(new String[0]);
+    }
+
+    public String[] getCoupleTablePreferenceContents(){
+        return tablePreference.toArray(new String[0]);
     }
 
     public String[] getTablePartyReservationContents(){
@@ -197,6 +211,15 @@ public class ChatbotData {
         return botMessage[0];
     }
 
+    public String getCoupleTablePreference(String userRespose){
+        for (String preferenceContent : tablePreference){
+            if(userRespose.toLowerCase().contains(preferenceContent)){
+                return preferenceContent;
+            }
+        }
+        return botMessage[0];
+    }
+    
     public String getTablePartyReseravationResponse(String userResponse){
         for (String chatTablePartyContent : tablePartyReservation.keySet()){
             if (userResponse.toLowerCase().contains(chatTablePartyContent)) {
@@ -207,5 +230,7 @@ public class ChatbotData {
             }  
         return botMessage[0];
     }
+
+
     
 }
