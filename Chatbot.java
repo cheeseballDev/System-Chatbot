@@ -136,6 +136,7 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
     }
 
     public void setTableCouple(ChatbotData chatbotData, Scanner userInput) {
+        /* 
         while(true){
             String userResponse = userInput.nextLine().toLowerCase().trim();
             if(Arrays.asList(chatbotData.getCoupleTablePreferenceContent()).contains(userResponse)){
@@ -215,6 +216,57 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
                 continue; 
             }
         }
+        */
+        while(true){
+            String userResponse = userInput.nextLine().toLowerCase().trim();
+            if(Arrays.asList(chatbotData.getCoupleTablePreferenceContent()).contains(userResponse)){
+                chatbotData.setCoupleTablePreference(userResponse);
+                break;
+            } else if (Arrays.asList(chatbotData.getHelpResponsesContent()).contains(userResponse)){
+                clearScreen();
+                showDialogue("Our table locations include the following:\n - Near window\n - Aisle\n - Corner\n - Booth\n - Entrance\n - Quiet area\n> ".toCharArray());
+                continue;
+            } else if (Arrays.asList(chatbotData.getNoResponsesContent()).contains(userResponse)) {
+                showDialogue("Okay, I'll just set one randomly for you then.\n".toCharArray());
+                chatbotData.setCoupleTablePreference(tableRandomizer());
+                break;
+            } else {
+                clearScreen();
+                showDialogue(getBotMessage(0).toCharArray());
+                continue; 
+            }
+        }
+        showDialogue("Date and time?\n> ".toCharArray());
+                while(true){
+                    String dateAndTime = userInput.nextLine().trim();
+                        try {
+                            SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy HH:mm");
+                            format.parse(dateAndTime);
+                            chatbotData.setDateAndTime(dateAndTime);
+                            break;
+                        } catch (ParseException e) {
+                            printErrorMessage("Incorrect time. Please try again");
+                        }
+                    }
+                clearScreen();
+
+                showDialogue("Any special touches like flowers?\n> ".toCharArray());
+                while(true){
+                    String specialTouchesResponse = userInput.nextLine().toLowerCase().trim();
+                    if (Arrays.asList(chatbotData.getYesResponsesContent()).contains(specialTouchesResponse)){
+                        clearScreen();
+                        showDialogue("What would they be?\n> ".toCharArray());
+                        String specialRequests = userInput.nextLine();
+                        chatbotData.setSpecialRequest(specialRequests);
+                        confirmTableCouple(chatbotData, userInput);
+                    }else if (Arrays.asList(chatbotData.getNoResponsesContent()).contains(specialTouchesResponse)){
+                        clearScreen();
+                        showDialogue("Alright! Sending you to table reservation page now!\n> ".toCharArray());
+                        confirmTableCouple(chatbotData, userInput);
+                    }
+                    showDialogue(getBotMessage(0).toCharArray());
+                }
+
     }
     
 

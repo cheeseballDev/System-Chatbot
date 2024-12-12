@@ -53,6 +53,7 @@ public class ChatbotData {
         noResponses.add("no");
         noResponses.add("nah");
         noResponses.add("nope");
+        noResponses.add("none");
         noResponses.add("n");
         noResponses.add("not really");
         noResponses.add("iie");
