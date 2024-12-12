@@ -10,6 +10,7 @@ public class Menu extends ChatbotData {
     private final Set<String> randomSuggestions;
     
     public Menu() {
+        super();
         menu = new HashMap<>();
         randomSuggestions = new HashSet<>();
 
@@ -36,6 +37,18 @@ public class Menu extends ChatbotData {
         String[] foodArray = randomSuggestions.toArray(new String[0]);
         Random rng = new Random();
         return "Here are our suggestions for you!\n" + foodArray[rng.nextInt(foodArray.length)];
+    }
+
+    @Override
+    public String getResponse(String userResponse) {
+        for (String chatContent : menu.keySet()){
+            if (userResponse.toLowerCase().contains(chatContent)) {
+                    List<String> chat = menu.get(chatContent);
+                    Random rng = new Random();
+                    return chat.get(rng.nextInt(chat.size()));
+                }
+            }
+        return getBotMessage(0);
     }
 
 }

@@ -14,6 +14,7 @@ public class Reservation extends ChatbotData {
     private String tablePreferenceString;
 
     public Reservation() {
+        super();
         reservations = new HashMap<>();
         tableCoupleReservation = new HashMap<>();
         tablePartyReservation = new HashMap<>();
@@ -111,4 +112,6 @@ public class Reservation extends ChatbotData {
     public String getCoupleTablePreference(){
         return tablePreferenceString;
     }
+
+    
 }
