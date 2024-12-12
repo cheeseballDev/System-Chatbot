@@ -173,7 +173,7 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
                 } 
             } else if (Arrays.asList(chatbotData.getHelpResponsesContent()).contains(userResponse)){
                 clearScreen();
-                showDialogue("Our table locations include the following:\n - Infront of a window\n - In an aisle\n - In the corner\n - Near the booth\n - Near the entrance\n - A quiet area\n> ".toCharArray());
+                showDialogue("Our table locations include the following:\n - Near window\n - Aisle\n - Corner\n - Booth\n - Entrance\n - Quiet area\n> ".toCharArray());
                 continue;
             } else if (Arrays.asList(chatbotData.getNoResponsesContent()).contains(userResponse)) {
                 showDialogue("Okay, I'll just set one randomly for you.".toCharArray());

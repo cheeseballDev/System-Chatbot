@@ -109,8 +109,7 @@ public class ChatbotData {
         //tableCoupleReservationPref
 
         // TABLE PREFERENCE
-        tablePreference.add("window");
-        tablePreference.add("windowed");
+        tablePreference.add("near window");
         tablePreference.add("aisle");
         tablePreference.add("corner");
         tablePreference.add("booth");
