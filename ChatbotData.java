@@ -11,6 +11,7 @@ public class ChatbotData {
     private final Set<String> noResponses;
     private final Set<String> tablePreference;
     private final Set<String> randomSuggestions;
+    private final Set<String> helpResponses;
     private final HashMap<String, List<String>> responses;
     private final HashMap<String, List<String>> reservations; 
     private final HashMap<String, List<String>> tableCoupleReservation;
@@ -28,6 +29,7 @@ public class ChatbotData {
         noResponses = new HashSet<>();
         tablePreference = new HashSet<>();
         randomSuggestions = new HashSet<>();
+        helpResponses = new HashSet<>();
         responses = new HashMap<>();
         reservations = new HashMap<>();
         tableCoupleReservation = new HashMap<>();
@@ -55,11 +57,19 @@ public class ChatbotData {
         noResponses.add("not really");
         noResponses.add("iie");
 
+        // HELP
+        helpResponses.add("help");
+        helpResponses.add("support");
+        helpResponses.add("huh");
+        helpResponses.add("what");
+        helpResponses.add("?");
+
         // FOOD FOR THE RANDOMIZER
         randomSuggestions.add("Menu (appetizers) \n => Edamame \n > INGREDIENTS \n  - sea salt \n  - sesame seed \n => Vegetable Tempura \n > INGREDIENTS \n  - Japanese sweet potato \n  - Japanese or Chinese eggplant \n  - premade tempura batter \n => Potstickers \n > INGREDIENTS \n  - ground pork \n  - water chestnuts \n  - baby bok choy \n  - eggs \n => Agedashi Tofu \n > INGREDIENTS \n  - Medium-Firm Tofu \n  - Corn Starch \n  - grated Daikon \n  - Bonito flakes");
         randomSuggestions.add("Menu (sushi rolls) \n => California Roll \n > INGREDIENTS \n  - Crab meat \n  - Avocado \n  - Cucumber \n  - Nori (seaweed) \n  - Sushi rice \n => Spicy Tuna Roll \n > INGREDIENTS \n  - Tuna \n  - Spicy mayo \n  - Cucumber \n  - Nori (seaweed) \n  - Sushi rice \n => Tempura Roll \n > INGREDIENTS \n  - Shrimp tempura \n  - Avocado \n  - Cucumber \n  - Nori (seaweed) \n  - Sushi rice");
         randomSuggestions.add("Menu (noodles) \n => Ramen \n > INGREDIENTS \n  - Pork belly \n  - Ramen noodles \n  - Soft-boiled egg \n  - Miso broth \n  - Scallions \n => Udon \n > INGREDIENTS \n  - Udon noodles \n  - Tempura shrimp \n  - Dashi broth \n  - Scallions \n  - Pickled ginger \n => Soba \n > INGREDIENTS \n  - Soba noodles \n  - Buckwheat flour \n  - Soy sauce \n  - Wasabi \n  - Seaweed");
 
+        // 
 
         // BASIC RESPONSES
         responses.put("hello", Arrays.asList("Hi {username}! I am BOT Mika. Please check our list by typing list for all of our available choices by typing list.\n> ", "Irasshaimase {username}! I am BOT Mika. Please check our list for all available choices by typing list.\n> "));
@@ -137,6 +147,11 @@ public class ChatbotData {
     public String[] getNoResponsesContent(){
         return noResponses.toArray(new String[0]);
     }
+
+    public String[] getHelpResponsesContent(){
+        return helpResponses.toArray(new String[0]);
+    }
+
 
     public String[] getTableCoupleReservationContent(){
         return tableCoupleReservation.keySet().toArray(new String[0]);

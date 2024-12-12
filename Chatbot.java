@@ -117,7 +117,7 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
     }
 
     public void setTableReservation(ChatbotData chatbotData, Scanner userInput){
-        showDialogue(("Are you reserving a table for a couple or for a party?\n").toCharArray());
+        showDialogue(("Are you reserving a table for a couple or for a party?\n> ").toCharArray());
         while(true){
             String userResponse = userInput.nextLine().toLowerCase().trim();
             if (Arrays.asList(chatbotData.getTableCoupleReservationContent()).contains(userResponse)) {
@@ -142,11 +142,12 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
                 clearScreen();
                 showDialogue(getBotMessage(0).toCharArray());
                 continue; 
+            } else if (userResponse.equals("help")){
+                
             }
             clearScreen();
             chatbotData.setCoupleTablePreference(userResponse);
             showDialogue("Date and time?\n> ".toCharArray());
-    
             while(true){
                 String dateAndTime = userInput.nextLine().trim();
                 try {
