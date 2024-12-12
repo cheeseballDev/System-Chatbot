@@ -38,9 +38,4 @@ public class Menu extends ChatbotData {
         return "Here are our suggestions for you!\n" + foodArray[rng.nextInt(foodArray.length)];
     }
 
-    public String tableRandomizer(){
-        String[] tableArray = tablePreference.toArray(new String[0]);
-        Random rng = new Random();
-        return tableArray[rng.nextInt(tableArray.length)];
-    }
 }

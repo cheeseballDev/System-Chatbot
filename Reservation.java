@@ -83,11 +83,6 @@ public class Reservation extends ChatbotData {
         return tablePartyReservation.keySet().toArray(new String[0]);
     }
 
-    public String tableRandomizer(){
-        String[] tableArray = tablePreference.toArray(new String[0]);
-        Random rng = new Random();
-        return tableArray[rng.nextInt(tableArray.length)];
-    }
 
     public void setPartyAmount(int amount){
         this.partyAmount = amount;
