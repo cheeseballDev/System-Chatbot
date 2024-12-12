@@ -66,9 +66,9 @@ public class ChatbotData {
         helpResponses.add("?");
 
         // FOOD FOR THE RANDOMIZER
-        randomSuggestions.add("Here's our menu for appetizers \n => Edamame \n > INGREDIENTS \n  - sea salt \n  - sesame seed \n => Vegetable Tempura \n > INGREDIENTS \n  - Japanese sweet potato \n  - Japanese or Chinese eggplant \n  - premade tempura batter \n => Potstickers \n > INGREDIENTS \n  - ground pork \n  - water chestnuts \n  - baby bok choy \n  - eggs \n => Agedashi Tofu \n > INGREDIENTS \n  - Medium-Firm Tofu \n  - Corn Starch \n  - grated Daikon \n  - Bonito flakes");
-        randomSuggestions.add("Here's our menu for sushi rolls \n => California Roll \n > INGREDIENTS \n  - Crab meat \n  - Avocado \n  - Cucumber \n  - Nori (seaweed) \n  - Sushi rice \n => Spicy Tuna Roll \n > INGREDIENTS \n  - Tuna \n  - Spicy mayo \n  - Cucumber \n  - Nori (seaweed) \n  - Sushi rice \n => Tempura Roll \n > INGREDIENTS \n  - Shrimp tempura \n  - Avocado \n  - Cucumber \n  - Nori (seaweed) \n  - Sushi rice");
-        randomSuggestions.add("Here's our menu for noodles \n => Ramen \n > INGREDIENTS \n  - Pork belly \n  - Ramen noodles \n  - Soft-boiled egg \n  - Miso broth \n  - Scallions \n => Udon \n > INGREDIENTS \n  - Udon noodles \n  - Tempura shrimp \n  - Dashi broth \n  - Scallions \n  - Pickled ginger \n => Soba \n > INGREDIENTS \n  - Soba noodles \n  - Buckwheat flour \n  - Soy sauce \n  - Wasabi \n  - Seaweed");
+        randomSuggestions.add("Here's our menu for appetizers \n => Edamame \n > INGREDIENTS \n  - sea salt \n  - sesame seed \n => Vegetable Tempura \n > INGREDIENTS \n  - Japanese sweet potato \n  - Japanese or Chinese eggplant \n  - premade tempura batter \n => Potstickers \n > INGREDIENTS \n  - ground pork \n  - water chestnuts \n  - baby bok choy \n  - eggs \n => Agedashi Tofu \n > INGREDIENTS \n  - Medium-Firm Tofu \n  - Corn Starch \n  - grated Daikon \n  - Bonito flakes\n");
+        randomSuggestions.add("Here's our menu for sushi rolls \n => California Roll \n > INGREDIENTS \n  - Crab meat \n  - Avocado \n  - Cucumber \n  - Nori (seaweed) \n  - Sushi rice \n => Spicy Tuna Roll \n > INGREDIENTS \n  - Tuna \n  - Spicy mayo \n  - Cucumber \n  - Nori (seaweed) \n  - Sushi rice \n => Tempura Roll \n > INGREDIENTS \n  - Shrimp tempura \n  - Avocado \n  - Cucumber \n  - Nori (seaweed) \n  - Sushi rice\n");
+        randomSuggestions.add("Here's our menu for noodles \n => Ramen \n > INGREDIENTS \n  - Pork belly \n  - Ramen noodles \n  - Soft-boiled egg \n  - Miso broth \n  - Scallions \n => Udon \n > INGREDIENTS \n  - Udon noodles \n  - Tempura shrimp \n  - Dashi broth \n  - Scallions \n  - Pickled ginger \n => Soba \n > INGREDIENTS \n  - Soba noodles \n  - Buckwheat flour \n  - Soy sauce \n  - Wasabi \n  - Seaweed\n");
 
         // BASIC RESPONSES
         responses.put("hello", Arrays.asList("Hi {username}! I am BOT Mika. Please check our list by typing list for all of our available choices by typing list.\n> ", "Irasshaimase {username}! I am BOT Mika. Please check our list for all available choices by typing list.\n> "));
@@ -257,5 +257,11 @@ public class ChatbotData {
         String[] foodArray = randomSuggestions.toArray(new String[0]);
         Random rng = new Random();
         return "Here are our suggestions for you!\n" + foodArray[rng.nextInt(foodArray.length)];
+    }
+
+    public String tableRandomizer(){
+        String[] tableArray = tablePreference.toArray(new String[0]);
+        Random rng = new Random();
+        return tableArray[rng.nextInt(tableArray.length)];
     }
 }

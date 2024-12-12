@@ -173,21 +173,54 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
                 } 
             } else if (Arrays.asList(chatbotData.getHelpResponsesContent()).contains(userResponse)){
                 clearScreen();
-                showDialogue("Our table locations include the following:\n - Infront of a window\n - In an aisle\n - In the corner\n - Near the booth\n - Near the entrance\n - A quiet area".toCharArray());
+                showDialogue("Our table locations include the following:\n - Infront of a window\n - In an aisle\n - In the corner\n - Near the booth\n - Near the entrance\n - A quiet area\n> ".toCharArray());
                 continue;
             } else if (Arrays.asList(chatbotData.getNoResponsesContent()).contains(userResponse)) {
                 showDialogue("Okay, I'll just set one randomly for you.".toCharArray());
+                clearScreen();
+                chatbotData.setCoupleTablePreference(tableRandomizer());
+                showDialogue("Date and time?\n> ".toCharArray());
+                while(true){
+                    String dateAndTime = userInput.nextLine().trim();
+                        try {
+                            SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy HH:mm");
+                            format.parse(dateAndTime);
+                            chatbotData.setDateAndTime(dateAndTime);
+                            break;
+                        } catch (ParseException e) {
+                            printErrorMessage("Incorrect time. Please try again");
+                        }
+                    }
+                clearScreen();
+
+                showDialogue("Any special touches like flowers?\n> ".toCharArray());
+                while(true){
+                    String specialTouchesResponse = userInput.nextLine().toLowerCase().trim();
+                    if (Arrays.asList(chatbotData.getYesResponsesContent()).contains(specialTouchesResponse)){
+                        clearScreen();
+                        showDialogue("What would they be?\n> ".toCharArray());
+                        String specialRequests = userInput.nextLine();
+                        chatbotData.setSpecialRequest(specialRequests);
+                        confirmTableCouple(chatbotData, userInput);
+                    }else if (Arrays.asList(chatbotData.getNoResponsesContent()).contains(specialTouchesResponse)){
+                        clearScreen();
+                        showDialogue("Alright! Sending you to table reservation page now!\n> ".toCharArray());
+                        confirmTableCouple(chatbotData, userInput);
+                    }
+                    showDialogue(getBotMessage(0).toCharArray());
+                } 
+            } else {
+                clearScreen();
+                showDialogue(getBotMessage(0).toCharArray());
+                continue; 
             }
-            clearScreen();
-            showDialogue(getBotMessage(0).toCharArray());
-            continue; 
         }
     }
     
 
     public void confirmTableCouple(ChatbotData chatbotData, Scanner userInput){
         clearScreen();
-        showDialogue(("You are reserving a couple's table with preference in the part of " + chatbotData.getCoupleTablePreference() + " set at " + chatbotData.getDateAndTime() + " with an additional request(s) of " + chatbotData.getSpecialRequest() +  " . Is this correct?\n> ").toCharArray());
+        showDialogue(("You are reserving a couple's table with table preference of " + chatbotData.getCoupleTablePreference() + " part set at " + chatbotData.getDateAndTime() + " with an additional request(s) of " + chatbotData.getSpecialRequest() +  " . Is this correct?\n> ").toCharArray());
         while (true) {
             String userResponse = userInput.nextLine().toLowerCase().trim();
             if (Arrays.asList(chatbotData.getYesResponsesContent()).contains(userResponse)) {
