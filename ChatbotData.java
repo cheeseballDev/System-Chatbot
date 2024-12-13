@@ -24,8 +24,9 @@ public class ChatbotData {
         responses = new HashMap<>();
         
         loadResponses();
-        botMessage[0] = "I did not understand what you said. Can you please repeat that?\n> ";
+        botMessage[0] = "I'm sorry, but I did not understand what you said. Can you please repeat that?\n> ";
         botMessage[1] = "Would you like a list of things I can assist you with?\n> ";
+        botMessage[2] = "If you are having trouble deciding which table location to select, just enter 'help' ! ";
     }
 
     private void loadResponses() {
