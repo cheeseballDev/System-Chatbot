@@ -34,7 +34,6 @@ public class ChatbotData {
         yesResponses.add("sure");
         yesResponses.add("okay");
         yesResponses.add("ok");
-        yesResponses.add("hai");
         yesResponses.add("yur");
         yesResponses.add("yes");
         yesResponses.add("yea");
@@ -46,7 +45,6 @@ public class ChatbotData {
         noResponses.add("nope");
         noResponses.add("n");
         noResponses.add("not really");
-        noResponses.add("iie");
         noResponses.add("none");
         noResponses.add("naur");
 

@@ -272,7 +272,7 @@ public class Chatbot extends ChatbotData implements Runnable, Miscellaneous {
     @Override
     public void run() {
         try {
-            Thread.sleep();
+            Thread.sleep(rng.nextInt(15)+15);
         } catch (Exception e) {
             e.printStackTrace();
         }
