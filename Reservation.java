@@ -13,15 +13,15 @@ public class Reservation extends ChatbotData {
     private String specialRequests;
     private String tablePreferenceString;
 
+
     public Reservation() {
-        super();
         reservations = new HashMap<>();
         tableCoupleReservation = new HashMap<>();
         tablePartyReservation = new HashMap<>();
 
         // RESERVATIONS
-        reservations.put("reserve", Arrays.asList("Sure thing! Let me ask you something first though...\n", "No problem {username}! Let me ask you something first though...\n"));
-        reservations.put("reservation", Arrays.asList("Sure thing! Let me ask you something first though...\n", "No problem {username}! Let me ask you something first though...\n"));
+        reservations.put("reserve", Arrays.asList("Sure thing! Let me ask you something first though...\n", "No problem! Let me ask you something first though...\n"));
+        reservations.put("reservation", Arrays.asList("Sure thing! Let me ask you something first though...\n", "No problem! Let me ask you something first though...\n"));
                 
         // TABLE PREFERENCE 
         tableCoupleReservation.put("couple", Arrays.asList("Sure thing! Any preferences for your seats?\n", "Of course! Do you have any seating preferences?\n"));
@@ -30,13 +30,13 @@ public class Reservation extends ChatbotData {
 
     @Override
     public String getResponse(String userResponse){
-        for (String chatReservationContent : reservations.keySet()){
-            if (userResponse.toLowerCase().contains(chatReservationContent)) {
-                    List<String> chat = reservations.get(chatReservationContent);
+        for (String chatContent : reservations.keySet()){
+            if (userResponse.contains(userResponse)) {
+                    List<String> chat = reservations.get(chatContent);
                     Random rng = new Random();
                     return chat.get(rng.nextInt(chat.size()));
                 }
-            }  
+            }
         return getBotMessage(0);
     }
 

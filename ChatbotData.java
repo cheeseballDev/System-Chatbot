@@ -36,6 +36,8 @@ public class ChatbotData {
         yesResponses.add("hai");
         yesResponses.add("yur");
         yesResponses.add("yes");
+        yesResponses.add("yea");
+        yesResponses.add("yeah");
 
         // NO
         noResponses.add("no");
@@ -44,6 +46,8 @@ public class ChatbotData {
         noResponses.add("n");
         noResponses.add("not really");
         noResponses.add("iie");
+        noResponses.add("none");
+        noResponses.add("naur");
 
         // HELP
         helpResponses.add("help");
@@ -64,8 +68,8 @@ public class ChatbotData {
 
         
         // BASIC RESPONSES
-        responses.put("hello", Arrays.asList("Hi {username}! I am BOT Mika. Please check our list by typing list for all of our available choices by typing list.\n> ", "Irasshaimase {username}! I am BOT Mika. Please check our list for all available choices by typing list.\n> "));
-        responses.put("hi", Arrays.asList("Konnichiwa {username}! I am BOT Mika. Please check our list by typing list for all of our available choices by typing list.\n> ", "Hello {username}! I am BOT Mika. Please check our list for all available choices by typing list.\n> "));
+        //responses.put("hello", Arrays.asList("Hi {username}! I am BOT Mika. Please check our list by typing list for all of our available choices by typing list.\n> ", "Irasshaimase {username}! I am BOT Mika. Please check our list for all available choices by typing list.\n> "));
+        //responses.put("hi", Arrays.asList("Konnichiwa {username}! I am BOT Mika. Please check our list by typing list for all of our available choices by typing list.\n> ", "Hello {username}! I am BOT Mika. Please check our list for all available choices by typing list.\n> "));
         responses.put("list", Arrays.asList("Here's the list of features available!\n> Restaurant description and information\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Contact information\n - Telephone number\n - Email address\n - Address\n\nIs there anything that suits your interest?\n> "));
         responses.put("features", Arrays.asList("Here's the list of features available!\n> Restaurant description and information\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Contact information\n - Telephone number\n - Email address\n - Address\n\nIs there anything that suits your interest?\n> "));
         responses.put("help", Arrays.asList("Here's the list of features available!\n> Restaurant description and information\n> Booking a reservation\n * Includes couple and party \n> Opening hours\n> Menu\n> Contact information\n - Telephone number\n - Email address\n - Address\n\nIs there anything that suits your interest?\n> "));
@@ -118,7 +122,7 @@ public class ChatbotData {
             if (userResponse.toLowerCase().contains(chatContent)) {
                     List<String> chat = responses.get(chatContent);
                     Random rng = new Random();
-                    return chat.get(rng.nextInt(chat.size())).replace("{username}", username);
+                    return chat.get(rng.nextInt(chat.size()));
                 }
             }
         return botMessage[0];
